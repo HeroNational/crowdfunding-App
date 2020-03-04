@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700i');
+#load{
+    overflow:hidden!important;
+}
+.circular-progress-bar {
+    position: absolute;
+    margin: auto auto;
+    bottom: calc(90% - 400px);
+    left: calc(50% - 100px);
+
+}
+
+.progress-percentage, .progress-text {
+    position: absolute;
+    width: 100%;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.progress-percentage {
+    color: #30270b;
+	font-size: 50px;
+    transform: translate(-50%, -60%);
+}
+
+.progress-text {
+    transform: translate(-50%, 40%);
+    color: #c28910;
+    font-size: 21px;
+}
