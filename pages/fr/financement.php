@@ -19,7 +19,9 @@
         max-width: 450px;
       }
     </style>
-
+    <?php
+      
+    ?>
     <h1 class="ui header blue center aligned segment">Ici titre du projet.</h1>
     <div style="padding:9px">
       <div class="hidden divider horizontal"></div>
@@ -45,7 +47,7 @@
                   </a>
                 </a>
                 <a class="friends">
-                  <a href="#" for="" class="ui teal label">
+                  <a href="profil.php" for="" class="ui teal label">
                     Contacter
                   </a>
                 </a>

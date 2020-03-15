@@ -1,13 +1,24 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
     <title>Soumettre un projet</title>
     
-    <?php $index="projet"; include("../../includes/header.php"); ?>
+    <?php 
+      $index="entreprendre"; include("../../includes/header.php");
+      include("../../includes/connexionBd.php"); 
+      if(!isset($_SESSION['id'])){
+        $_SESSION['submint_project']=true;
+        $_SESSION['notification']=true;
+        $_SESSION['notification_text']="Veillez vous connecter pour soumettre vos projets.";
+        $_SESSION['notification_status']="info";
+        header("location: inscription.php");
+      }
+    ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
           <?php include("../../includes/menu.php"); ?>
+ 
     <style type="text/css">
       body {
         background-color: #DADADA;
@@ -32,11 +43,11 @@
                         Nouveau projet
                       </h5>
                   </div>
-                  <form action="pages/connexion.php.php" method="post" autocomplete="off" id="formA" class="text-center border border-light p-5 ui large form"> 
+                  <form action="../traitements/projet.php" enctype="multipart/form-data" method="post" id="formA" class="text-center border border-light p-5 ui large form"> 
                     <div class="field">
                         <label for="" style="float:left; font-weight:100"><i class=" orange idea icon"></i> Nom du projet</label>
                         <div class="ui left icon input">
-                            <input type="text" name="name" placeholder="Nom du projet"  required="required">
+                            <input type="text" name="nom" placeholder="Nom du projet"  required="required">
                         </div>
                       </div>
 
@@ -44,41 +55,47 @@
                         <label for="" style="float:left; font-weight:100"><i class=" orange picture icon"></i> Image représentative du projet</label>
                         <br style="margin:3px;">
                         <label for="imagefile" style="color:white" class="ui button large fluid teal">Sélctionnez le fichier</label>
-                        <input type="file" name="imagefile" accept="image/*" id="imagefile" style="display:none">
+                        <input type="file" name="image" accept="image/*" id="imagefile" style="display:none">
                       </div>
-                    
+                      
                       <div class="field">
-                        <label for="" style="float:left; font-weight:100"><i class="money green icon"></i> Montant visé</label>
+                        <label for="" style="float:left; font-weight:100"><i class="info blue icon"></i> Slogan</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="slogan" placeholder="Slogan du projet "  required="required">
+                        </div>
+                      </div> 
+
+                      <div class="field">
+                        <label for="" style="float:left; font-weight:100"><i class="money green icon"></i> Montant visé en XAF</label>
                         <div class="ui left icon input">
                             
-                            <input type="number" name="number" placeholder="Montant visé"  required="required">
+                            <input type="number" name="objectif" placeholder="Montant visé"  required="required">
+                        </div>
+                      </div> 
+
+                      <div class="field">
+                        <label for="" style="float:left; font-weight:100"><i class="clock teal icon"></i> Date de fin de campagne</label>
+                        <div class="ui left icon input">
+                            
+                            <input type="date" id="date" name="duree" placeholder="Duree de la campagne "  required="required">
                         </div>
                       </div> 
 
                       <div class="field">
                         <label for="" style="float:left; font-weight:100"><i class="block  layout icon orange"></i>   Catégorie du projet</label>
-                        <select name="categorie" id="">
-                          <option value="Informatique">Informatique</option>
-                          <option value="Cosmetique">Cosmetique</option>
-                          <option value="Agricole">Agricole</option>
-                          <option value="Ingenieurie">Ingenieurie</option>
-                          <option value="Education">Education</option>
-                          <option value="Santé">Santé</option>
+                        <select name="categorie" >
+                          <?php 
+                            $requette=$bdd->query("select * from categorie where etat=1");
+                            while($resultat=$requette->fetch(PDO::FETCH_OBJ)){
+                              echo "<option value='$resultat->idcat'>".utf8_encode($resultat->categorie)."</option>";
+                            }
+                          ?>
                         </select>
                       </div>
-
-                      <div class="field">
-                        <label for="" style="float:left; font-weight:100"><i class="info blue icon"></i> Slogan</label>
-                        <div class="ui left icon input">
-                            
-                            <input type="text" name="number" placeholder="Slogan"  required="required">
-                        </div>
-                      </div> 
-
                       <div class="field">
                         <span  style="float: left;"><i class="tag icon teal"></i> Description du projet</span>
                         <div class="ui left icon input">
-                            <textarea name="text"> </textarea>
+                            <textarea  required="required" class="ui required field" name="description"> </textarea>
                         </div>
                       </div>
                       <div class="fields two">        

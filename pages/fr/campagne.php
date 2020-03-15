@@ -3,7 +3,7 @@
 <head>
     <title>Toutes les campagnes</title>
     
-    <?php $index="projet"; include("../../includes/header.php"); ?>
+    <?php $index="financer"; include("../../includes/header.php"); ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
@@ -49,65 +49,68 @@
               class="ui center aligned stackable grid"
       >
           <?php 
-              for ($i=0; $i<20; $i++){
-                $hover=array(
-                    1=>"imghvr-fade",
-                    2=>"imghvr-push-up",
-                    3=>"imghvr-push-down",
-                    4=>"imghvr-push-left",
-                    5=>"imghvr-push-right",
-                    6=>"imghvr-slide-up",
-                    7=>"imghvr-slide-down",
-                    8=>"imghvr-slide-left",
-                    9=>"imghvr-slide-right",
-                    10=>"imghvr-reveal-up",
-                    11=>"imghvr-reveal-right",
-                    12=>"imghvr-reveal-left",
-                    13=>"imghvr-hinge-up",
-                    14=>"imghvr-flip-horiz",
-                    15=>"imghvr-flip-vert",
-                    16=>"imghvr-flip-diag-1",
-                    17=>"imghvr-flip-diag-2",
-                    18=>"imghvr-shutter-out-horiz",
-                    19=>"imghvr-shutter-out-vert",
-                    20=>"imghvr-shutter-out-diag-1",
-                    21=>"imghvr-shutter-out-diag-2",
-                    22=>"imghvr-shutter-in-horiz",
-                    23=>"imghvr-shutter-in-vert",
-                    24=>"imghvr-shutter-in-out-horiz",
-                    25=>"imghvr-shutter-in-out-diag-1",
-                    26=>"imghvr-shutter-in-out-vert",
-                    27=>"imghvr-shutter-in-out-diag-2",
-                    28=>"imghvr-shutter-in-out-vert",
-                    29=>"imghvr-fold-up",
-                    30=>"imghvr-fold-down",
-                    31=>"imghvr-fold-left",
-                    32=>"imghvr-fold-right",
-                    33=>"imghvr-zoom-in",
-                    34=>"imghvr-zoom-out",
-                    35=>"imghvr-zoom-out-up",
-                    36=>"imghvr-zoom-out-down",
-                    37=>"imghvr-zoom-out-left",
-                    38=>"imghvr-zoom-out-right",
-                    39=>"imghvr-zoom-out-flip-vert",
-                    40=>"imghvr-blur"
-                  );
+              $hover=array(
+                1=>"imghvr-fade",
+                2=>"imghvr-push-up",
+                3=>"imghvr-push-down",
+                4=>"imghvr-push-left",
+                5=>"imghvr-push-right",
+                6=>"imghvr-slide-up",
+                7=>"imghvr-slide-down",
+                8=>"imghvr-slide-left",
+                9=>"imghvr-slide-right",
+                10=>"imghvr-reveal-up",
+                11=>"imghvr-reveal-right",
+                12=>"imghvr-reveal-left",
+                13=>"imghvr-hinge-up",
+                14=>"imghvr-flip-horiz",
+                15=>"imghvr-flip-vert",
+                16=>"imghvr-flip-diag-1",
+                17=>"imghvr-flip-diag-2",
+                18=>"imghvr-shutter-out-horiz",
+                19=>"imghvr-shutter-out-vert",
+                20=>"imghvr-shutter-out-diag-1",
+                21=>"imghvr-shutter-out-diag-2",
+                22=>"imghvr-shutter-in-horiz",
+                23=>"imghvr-shutter-in-vert",
+                24=>"imghvr-shutter-in-out-horiz",
+                25=>"imghvr-shutter-in-out-diag-1",
+                26=>"imghvr-shutter-in-out-vert",
+                27=>"imghvr-shutter-in-out-diag-2",
+                28=>"imghvr-shutter-in-out-vert",
+                29=>"imghvr-fold-up",
+                30=>"imghvr-fold-down",
+                31=>"imghvr-fold-left",
+                32=>"imghvr-fold-right",
+                33=>"imghvr-zoom-in",
+                34=>"imghvr-zoom-out",
+                35=>"imghvr-zoom-out-up",
+                36=>"imghvr-zoom-out-down",
+                37=>"imghvr-zoom-out-left",
+                38=>"imghvr-zoom-out-right",
+                39=>"imghvr-zoom-out-flip-vert",
+                40=>"imghvr-blur"
+              );
+              $sql=$bdd->query("select * from projet INNER JOIN internaute on internaute.idU=projet.internaute");
+              $idProf=array();
+              $wow=0;
+              while($resultats=$sql->fetch(PDO::FETCH_OBJ)){
                 $posHover=mt_rand(1,39);
           ?>
-          <div class="four wide column">
+          <div class="three wide column">
               <div class="ui card">
-                  <figure class=<?php echo $hover[$posHover]?> style="background: url(<?php echo $img="../../img/".mt_rand(1,5); ?>.jpg)">
-                      <img src="<?php echo $img ?>.jpg" alt="Montant visé <?php echo $de=explode(" ",mt_rand(200000,50000000));?>"/>
+                  <figure class=<?php echo $hover[$posHover]?> style="background:url(<?php echo $img='../../img/imgprojet/'.$resultats->image.'.jpg';?>); background-position-x:center; background-size:cover;">
+                      <img src="<?php echo $img='../../img/imgprojet/'.$resultats->image.'.jpg';?>" alt="Montant visé <?php echo $resultats->objectif;?>" style='min-height:200px'/>
                       <figcaption>
-                          <h3>Wibu</h3>
+                          <h3><?php echo $resultats->nomProjet ?></h3>
                           <p style="color:white">
-                          la première plateforme camerounaise de covoiturage
+                            la première plateforme camerounaise de covoiturage
                           </p>
                       </figcaption>
                   </figure>
-                  <h1 class="ui header" style="margin-top:-6px">Cacao culture</h1>
+                  <h1 class="ui header" style="margin-top:-6px"><?php echo $resultats->nomProjet ?></h1>
                   <div class="meta">
-                      Juste pour une presentation
+                  <?php echo $resultats->slogan ?>
                   </div>
                   <hr>
                   <span>
@@ -117,8 +120,8 @@
                   </span>
                   <br>
                   <?php 
-                    $sommetotale=mt_rand(100,40000000);
-                    $sommeacquise=mt_rand(0,40000000);
+                    $sommetotale=$resultats->objectif;;
+                    $sommeacquise=mt_rand(0,400);
                     $per=($sommeacquise*100)/$sommetotale;
                     $sommetotale=number_format($sommetotale, 0,'.',' ');
                     $per=number_format($per, 0,'.', '');
@@ -151,7 +154,7 @@
                           </span>
                       </span>
                   </span>
-                  <a href="financement.php?id" class="ui button orange circular" style="padding:-5px 3px!important"><span class="lnr lnr-plus-circle"></span> Financer</a>
+                  <form action="financement.php?id"><input type="hidden" name="projet" value="<?php echo ""; ?>"><button type="submit"  class="ui button orange fluid" style="padding:-5px 3px!important"><span class="lnr lnr-plus-circle"></span> Financer</button></form>
               
               </div>
           </div>

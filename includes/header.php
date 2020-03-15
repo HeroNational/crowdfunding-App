@@ -31,9 +31,9 @@
     <meta name="og:description" content="La solution au problème de financement de vos projets.">
 
     <meta name="keywords" content="crowndfunding, financement participatif,  financement, participatif, projet, guanxi, investissement, invest, money, argent, web payment, payement en ligne, payement, payment, abodah, crowndlending" />
-    <meta name="og:url" content="https://abodahfunding.com/">
+    <meta name="og:url" content="http://localhost/serve/Crowdfunding/">
     <meta name="og:title" content="Abodah Funding">
-    <meta name="og:image" content="https://abodahfunding/img.png">
+    <meta name="og:image" content="http://localhost/serve/Crowdfunding/img/loader.gif">
     <link id="favicon" rel="shortcut icon" href="../../img/contactUs.png">
     <link rel="apple-touch-icon" sizes="194x194" href="../../img/contactUs.png">
     <link rel="stylesheet" href="../../style/bootstrap/bootstrap.css">
@@ -43,9 +43,13 @@
     <link rel="stylesheet" href="../../style/main.css">
     <link rel="stylesheet" href="../../style/animate/animate.css">
     <link rel="stylesheet" href="../../style/imgHover/imagehover.min.css">
+    <link rel="stylesheet" href="../../style/swal/swal.css">
+    <link rel="stylesheet" href="../../style/bootstrap/bootstrapswal.css">
     <link rel="stylesheet" href="../../style/socicon/style.css">
     <link rel="stylesheet" href="../../js/particlesjs/demo/css/style.css">
     <link rel="stylesheet" href="../../style/Linearicons/Linearicons/Web Font/style.css">
+    <script src="../../js/wow/wow.js"></script>
+
 
     
 
@@ -58,9 +62,18 @@
             });
           })
         ;
+        function contextmenu(){
+          swal(
+            "",
+            "Action non permise.\n\n",
+            "error"
+            );
+        }
     </script>
+    <script src="../../js/swal/swalmin.js"></script>
+
 </head>
-<body onload="load()">
+<body oncontextmenu="contextmenu();return false;" id="gbody" onload="load()">
 
 
 

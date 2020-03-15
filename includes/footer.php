@@ -8,64 +8,91 @@
                     background:url(../../img/22717_une.jpg);
                     background-Size:cover;
                     background-Position-Y:-85px; 
+                    display:
+                    <?php
+                      if(isset($_SESSION['mail']) and isset($_SESSION['nom'])){
+                        if(!empty($_SESSION['mail']) && !empty($_SESSION['nom'])){
+                          echo "none;";
+                        }
+                      }
+                    ?>;
             "
             class="ui center aligned stackable grid"
     >
-        <div class="ui four wide column" style='color:white'>
-            <h1>
-                Soyez des notre<br/><br/>
-                <!-- bouton-->
-            </h1>
-            <a href="#" class="ui animated horizontal circular orange button boutonLogin" id="#button" tabindex="0"
-                style="
-                        font-Weight:'100';
-                        border:1px solid transparent;
-                        position:relative;
-                        top:-5px;
-                        transition:200ms linear;
-                      "
-                href="#" 
-            >
-                <center style="position:relative;top:-4px">
-                    <span class="visible content">
-                        <span class='lnr lnr-user' style="font-Weight:bold;font-Size:19px; position:relative; top:4px;position:relative; left:0px!important"></span>&nbsp;Inscription
-                    </span>
-                    <span class="hidden content">
-                        <span class='lnr lnr-users' style="font-Weight:bold;font-Size:19px; position:relative; top:4px"></span>
-                    </span>
-                </center>
-            </a>
-        </div>
-        <div class="ui eight wide column  center aligned">
+        <?php if(!isset($_SESSION['nom'])){ ?>
+          <div class="ui four wide column" style='color:white'>
+              <h1>
+                  Soyez des notre<br/><br/>
+                  <!-- bouton-->
+              </h1>
+              <a href="connexion.php" class="ui animated horizontal circular orange button boutonLogin" id="#button" tabindex="0"
+                  style="
+                          font-Weight:'100';
+                          border:1px solid transparent;
+                          position:relative;
+                          top:-5px;
+                          transition:200ms linear;
+                        "
+                  href="#" 
+              >
+                  <center style="position:relative;top:-4px">
+                      <span class="visible content">
+                          <span class='lnr lnr-user' style="font-Weight:bold;font-Size:19px; position:relative; top:4px;position:relative; left:0px!important"></span>&nbsp;Inscription
+                      </span>
+                      <span class="hidden content">
+                          <span class='lnr lnr-users' style="font-Weight:bold;font-Size:19px; position:relative; top:4px"></span>
+                      </span>
+                  </center>
+              </a>
+          </div>
+        <?php }
+        
+          (!isset($_SESSION['mail']))?$_SESSION['mail']=false:"";
+          if(isset($_SESSION['email'])){
+          $email=$_SESSION['email'];
+          $sql="SELECT email FROM newsletter WHERE email='$email'";
+          $execution=$bdd->query($sql);
+          while($execution->fetch()){
+              $_SESSION['mail']=true;
+          }
+        }
+        if($_SESSION['mail']==false){
+        ?>          
+          <div class="ui eight wide column  center aligned">
             <div class="ui wide column middle aligned" style='margin-Top:10px'>
-                <div class="ui container message" style="background:rgba(95, 94, 94, 0.9)"> 
-                    
-                    <span class="ui meta">
-                        <h2 class="ui header" style="color:white">
-                            Souscrire a notre lettre d'informations 
-                        </h2>
-                        <br/>
-                        <span class="ui meta" style="color: beige;">
-                            Nous vous envoyons un bref mail mensuel pour vous informer sur la plateforme. <br/>
-                        </span>
-                        <br/>
-                        <center>
-                          
-                            <div class="ui action left icon input">
-                              <i class="mail icon"></i>
-                              <input type="email" name="" placeholder="Votre email" id=""/>
-                              <buton class="ui orange button" id="nlettSend">envoyer</buton>
-                          </div>
-                        </center>
-                        
+              <div class="ui container message" style="background:rgba(95, 94, 94, 0.9)"> 
+                  <div class="ui meta">
+                    <h2 class="ui header" style="color:white">
+                        Souscrire a notre lettre d'informations 
+                    </h2>
+                    <br/>
+                    <span class="ui meta" style="color: beige;">
+                        Nous vous envoyons un bref mail mensuel pour vous informer sur la plateforme. <br/>
                     </span>
-                </div>
+                    <br/>
+                    
+                  </div>
+                  <center>
+                    <form action="../traitements/newsletter.php" class="" method="post">
+                      <div class="ui action left icon input">
+                        <i class="mail icon"></i>
+                        <input type="email" name="emailn" required="requierd" placeholder="Votre email" id=""/>
+                        <i class="mail icon"></i>
+                      </div>
+                      <input type="submit" class="ui orange button" id="nlettSend" value="envoyer"/>
+                    </form>
+                  </center>
+              </div>
             </div>
         </div>
+        <?php }?>
         <div class="ui four wide column">
         </div>
     </div>      
-
+    <?php
+     if(isset($index)){ 
+      if($index=="index"){ 
+    ?>
     <div class="ui stackable center aligned page grid">
       <div class="row">
         <div class="column">
@@ -175,7 +202,10 @@
         </div>
       </div>
     </div>
-
+      <?php 
+      }
+    }
+     ?>
   <section>
     
       <div style="padding: 40px 0px;
@@ -189,8 +219,8 @@
           class="ui center aligned stackable grid"
       >
           <div class="nine wide middle aligned right aligned column">
-              <span class="ui header" style="color:white">Etes vous pret ?</span>&nbsp;&nbsp;&nbsp;
-              <button class="ui button black huge circular green">Creer un projet</button> 
+              <span class="ui header" style="color:white"><?php echo !isset($_SESSION['projet'])?"Etes vous pret?":"Merci d'avoir entrepris"; ?> </span>&nbsp;&nbsp;&nbsp;
+              <a href="projet.php" class="ui button black huge circular green"><?php echo !isset($_SESSION['projet'])?"Creer un projet":"Creer un nouveau projet !"; ?></a> 
           </div>
       </div>
       
@@ -210,12 +240,18 @@
                   <div class="three wide column">
                       <div class="ui link list">
                       <h4 class="ui item">Plateforme</h4>
-                          <a href="#" class="item">Decouvrir</a>
+                          <a href="campagne.php" class="item">Decouvrir</a>
                           <a href="#" class="item">Comment ca marche?</a>
                           <a href="#" class="item">Tarifs</a>
                           <a href="#" class="item">Blog</a>
-                          <a href="#" class="item">Inscrivez-vous gratuitement</a>
-                          <a href="#" class="item">Connexion</a>
+                          <?php 
+                            if(!isset($_SESSION['nom'])){
+                            ?>
+                              <a href="inscription.php" class="item">Inscrivez-vous gratuitement</a>
+                              <a href="#" class="item">Connexion</a>
+                            <?php
+                            }
+                          ?>
                           <hr>
                           <a href="#" class="item">Clause de services</a>
                           <a href="#" class="item">Politique de confidencialite</a>
@@ -224,8 +260,8 @@
                   <div class="four wide column">
                       <div class="ui link list">
                           <h4 class="ui item">Rejoignez le mouvement</h4>
-                          <a href="#" class="item">Creer un projet</a>
-                          <a href="#" class="item">Financer un projet</a>
+                          <a href="projet.php" class="item">Creer un projet</a>
+                          <a href="campagne.php" class="item">Financer un projet</a>
                           <a href="#" class="item">Aider la plateforme</a>
                       </div>
                   </div>
@@ -234,6 +270,7 @@
                           <h4 class="item">Contactez nous</h4>
                           <a href="#" class="item"><span class="lnr lnr-phone-handset"></span>&nbsp;&nbsp;Telephone:+237 657675216</a>
                           <a href="#" class="item"><span class="socicon-whatsapp"></span>&nbsp;&nbsp;+237 657675216</a>
+                          <a href="contactus.php" class="item"><span class="socicon-internet"></span>&nbsp;&nbsp;Via le site web</a>
                           
                           <a href="#" class="item"><span class="socicon-mailru"></span>&nbsp;&nbsp;Email: funding@abodah.com</a>
                           <a href="#" class="item"><span class="lnr lnr-inbox"></span>&nbsp;&nbsp;Boite postale: 2345 Yde</a>

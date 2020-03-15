@@ -32,26 +32,41 @@
                               Nous contacter
                             </h5>
                         </div>
-                        <form action="pages/connexion.php.php" method="post" autocomplete="off" id="formA" class="text-center border border-light p-5 ui large form"> 
+                        <form action="../traitements/contactus.php" method="post" id="formA" class="text-center border border-light p-5 ui large form"> 
 
                           <div class="field">
                             <div class="ui left icon input">
                                 <i class="user green icon"></i>
-                                <input type="text" name="" placeholder="Vorte nom"  required="required">
+                                <input type="text" name="nom" placeholder="Vorte nom" value="<?php
+                                    if(isset($_SESSION['nom'])){
+                                      if(!empty($_SESSION['nom'])){
+                                        echo $_SESSION['nom']." ";
+                                       }
+                                     } 
+                                     if(isset($_SESSION['prenom'])){
+                                      if(!empty($_SESSION['prenom'])){
+                                        echo $_SESSION['prenom'];
+                                       }
+                                     } ?>" required="required">
                             </div>
                           </div> 
       
                           <div class="field">
                             <div class="ui left icon input">
                                 <i class=" orange mail icon"></i>
-                                <input type="email" name="email" placeholder="Votre email"  required="required">
+                                <input type="email" name="email" placeholder="Votre email" value="<?php
+                                    if(isset($_SESSION['email'])){
+                                     if(!empty($_SESSION['email'])){
+                                       echo $_SESSION['email'];
+                                      }
+                                    } ?>" required="required">
                             </div>
                           </div>
 
                           <div class="field">
                             <div class="ui left icon input">
                               <label for="" style="float: left; color:rgba(0,0,0,0.5)">Votre message</label><br><br>
-                                <textarea name="text" placeholder="Votre message"> </textarea>
+                                <textarea name="texte" placeholder="Votre message"> </textarea>
                             </div>
                           </div>
                           <div class="field">        

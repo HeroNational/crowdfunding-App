@@ -123,24 +123,33 @@
               39=>"imghvr-zoom-out-flip-vert",
               40=>"imghvr-blur"
             );
-              for ($i=0; $i<3; $i++){
-                
+            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' order by p.idpro DESC LIMIT 3";
+            $execution=$bdd->query($requete);
+              while($resultset=$execution->fetch(PDO::FETCH_OBJ)){
                 $posHover=mt_rand(1,39);
+                $sommeacquise=mt_rand(1,1000000);
+                $requeteS="SELECT sum(montant) as acquis FROM financement where internaute='$resultset->internaute' and projet='$resultset->idpro'";
+                $executionS=$bdd->query($requeteS);
+                $resultsetS=$executionS->fetch(PDO::FETCH_OBJ);
+                $sommeacquise=$resultsetS->acquis;
+                $executionS->closecursor();
           ?>
           <div class="four wide center aligned column">
               <div class="ui card">
-                  <figure class=<?php echo $hover[$posHover]?> style="background: url(<?php echo $img="../../img/".mt_rand(1,5); ?>.jpg)">
-                      <img src="<?php echo $img ?>.jpg"/>
+                  <figure class=<?php echo $hover[$posHover]?> style="background: url(../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg);background-size:cover;">
+                      <img src="../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg"/>
                       <figcaption>
-                          <h3>Wibu</h3>
+                          <h3><?php echo $resultset->nomProjet.''.$resultset->internaute ?></h3>
                           <p style="color:white">
-                          la première plateforme camerounaise de covoiturage
+                            <?php echo utf8_decode($resultset->description); ?>
                           </p>
                       </figcaption>
                   </figure>
-                  <h1 class="ui header" style="margin-top:-6px">Cacao culture</h1>
+                  <h1 class="ui header" style="margin-top:-6px">
+                    <?php echo utf8_decode($resultset->nomProjet) ?>
+                  </h1>
                   <div class="meta">
-                      Juste pour une presentation
+                    <?php echo utf8_decode($resultset->slogan) ?>
                   </div>
                   <hr>
                   <span>
@@ -150,19 +159,18 @@
                   </span>
                   <br>
                   <?php 
-                    $sommetotale=mt_rand(100,40000000);
-                    $sommeacquise=mt_rand(0,40000000);
+                    $sommetotale=$resultset->objectif;
                     $per=($sommeacquise*100)/$sommetotale;
                     $sommetotale=number_format($sommetotale, 0,'.',' ');
                     $per=number_format($per, 0,'.', '');
                     
                   ?>
                   <br>
-                  <div class=""><?php echo $per=($per<=100)?$per:"100"; echo " %". " de <b>".$sommetotale."</b> XAF"; ?></div>
+                  <div class=""><?php echo number_format($sommeacquise,0,"."," ").' ('.$per."%) sur <b>".$sommetotale."</b> XAF"; ?></div>
                   <span class="ui extra">
                       <span class="ui purple progress active" style="height:13px!important">
                           <span class="bar" style="width:
-                                <?php echo ($per);?>%;background:<?php
+                                <?php echo ($per=($per<=100)?$per:"100");?>%;background:<?php
                                     if($per<16.66){
                                         $theming="217, 92, 92";
                                     }elseif($per>16.65 and $per <33.33){
@@ -184,12 +192,19 @@
                           </span>
                       </span>
                   </span>
-                  <a href="financement.php?id" class="ui button orange circular" style="padding:-5px 3px!important"><span class="lnr lnr-plus-circle"></span> Financer</a>
+                  <form action="financement.php" method="get">
+                    <input type="hidden" name="id" value="<?php echo $resultset->idpro ?>">
+                    <button type="submit"  class="ui button orange fluid" style="padding:-5px 3px!important">
+                      <span class="lnr lnr-plus-circle"></span> 
+                      Financer
+                    </button>
+                  </form>
               
               </div>
           </div>
         <?php 
-        }
+          }
+          $execution->closecursor();
         ?>
         <style>
             .explainProj::first-letter{
