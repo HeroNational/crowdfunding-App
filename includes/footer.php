@@ -1,4 +1,6 @@
-<div>
+</div>
+</section>
+<div class=" wow slideInUp /zoomIn">
           
     <div 
         style=
@@ -17,9 +19,9 @@
                       }
                     ?>;
             "
-            class="ui center aligned stackable grid"
+            class="ui center aligned stackable grid disap"
     >
-        <?php if(!isset($_SESSION['nom'])){ ?>
+        <?php $a=0; if(!isset($_SESSION['nom'])){ ?>
           <div class="ui four wide column" style='color:white'>
               <h1>
                   Soyez des notre<br/><br/>
@@ -46,7 +48,6 @@
               </a>
           </div>
         <?php }
-        
           (!isset($_SESSION['mail']))?$_SESSION['mail']=false:"";
           if(isset($_SESSION['email'])){
           $email=$_SESSION['email'];
@@ -85,7 +86,17 @@
               </div>
             </div>
         </div>
-        <?php }?>
+        <?php
+         }else{
+          $a=$a+1;
+          if($a==2)
+          echo "
+              <style>
+                display:none;
+              </style>
+          ";
+        }
+        ?>
         <div class="ui four wide column">
         </div>
     </div>      
@@ -345,3 +356,4 @@
 <script src="../../js/wow/wow.min.js"></script>
 <script src="../../js/particlesjs/particles.min.js"></script>
 <script src="../../js/particlesjs/demo/js/app.js"></script>
+<script type="text/javascript" src="../../js/returnOnTop.js"></script>

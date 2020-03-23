@@ -68,7 +68,7 @@
             </div>
           </div>
     </section>
-    <section  id="features" class=" text-center wow fadeInUp">
+    <section  id="features" class=" container text-center wow fadeInUp">
         <div class="container">
           <div class="section-title text-center">
             <h2>Quelques campagnes</h2>
@@ -123,25 +123,25 @@
               39=>"imghvr-zoom-out-flip-vert",
               40=>"imghvr-blur"
             );
-            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' order by p.idpro DESC LIMIT 3";
+            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' group by idpro order by p.idpro DESC  limit 3";
             $execution=$bdd->query($requete);
               while($resultset=$execution->fetch(PDO::FETCH_OBJ)){
                 $posHover=mt_rand(1,39);
                 $sommeacquise=mt_rand(1,1000000);
-                $requeteS="SELECT sum(montant) as acquis FROM financement where internaute='$resultset->internaute' and projet='$resultset->idpro'";
+                $requeteS="SELECT sum(montant) as acquis FROM financement where projet='$resultset->idpro'";
                 $executionS=$bdd->query($requeteS);
                 $resultsetS=$executionS->fetch(PDO::FETCH_OBJ);
                 $sommeacquise=$resultsetS->acquis;
                 $executionS->closecursor();
           ?>
-          <div class="four wide center aligned column">
+          <div class="five wide center aligned column">
               <div class="ui card">
                   <figure class=<?php echo $hover[$posHover]?> style="background: url(../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg);background-size:cover;">
                       <img src="../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg"/>
                       <figcaption>
-                          <h3><?php echo $resultset->nomProjet.''.$resultset->internaute ?></h3>
+                          <h3><?php echo '<u>'.$resultset->nomProjet.'</u>'?></h3>
                           <p style="color:white">
-                            <?php echo utf8_decode($resultset->description); ?>
+                            <?php echo utf8_decode($resultset->descriptionProjet); ?>
                           </p>
                       </figcaption>
                   </figure>
@@ -192,13 +192,7 @@
                           </span>
                       </span>
                   </span>
-                  <form action="financement.php" method="get">
-                    <input type="hidden" name="id" value="<?php echo $resultset->idpro ?>">
-                    <button type="submit"  class="ui button orange fluid" style="padding:-5px 3px!important">
-                      <span class="lnr lnr-plus-circle"></span> 
-                      Financer
-                    </button>
-                  </form>
+                  <a href="financement.php?<?php echo 'token='.str_shuffle("erfwfkfewhfewafwegswefhbewgjhwageg24354geGFE4w2ga4aew54erg3gaerg5").'&prodhgdthtrhydtrtrjutydrhrthwee='.$resultset->idpro.'&kind='.str_shuffle("erfg24354geGFE4w2ga4aew54erg3gaerg5") ?>"   class="ui button orange fluid" style="padding:-5px 3px!important">Financer</a>
               
               </div>
           </div>
@@ -302,7 +296,7 @@
         <div class="section-title text-center">
     
             <h2>Nos objectifs</h2>
-    
+            
         </div>
 
       </section>
@@ -310,7 +304,7 @@
         <div class="container">
           <div class="row justify-content-center">
             <span class="col-md-2 col-lg-8"><br><br>
-              <img src="../../img/2.jpg" alt="About">
+              <img src="../../img/f.png" alt="About">
             </span>
     
             <span class="col-md-7 col-lg-4">
@@ -335,7 +329,7 @@
           <i class="notched circle loading icon"></i>
         </div>
     
-      <section id="features" class="padd-section text-center wow fadeInUp">
+      <section id="features" class="text-center wow fadeInUp">
     
         <div class="container">
           <div class="section-title text-center">
@@ -400,7 +394,7 @@
   
 
 
-      <section class="ui container">
+      <section class="ui container wow slideInLeft">
         <div class="ui relaxed divided items">
           <div class="item">
             <div class="ui small image">
@@ -417,10 +411,10 @@
                 Dans le plan de mise en place d'une entreprise, il se pose toujours....
               </div>
               <div class="extra">
-                <div class="ui right floated orange button">
+                <a href='blog.php' class="ui right floated orange button">
                   Lire
                   <i class="right chevron icon"></i>
-                </div>
+                </a>
                 <div class="ui label"  id="thumbLiker" style="cursor:pointer" onclick="liker()"><i class="lnr lnr-thumbs-up"></i>26</div>
               </div>
             </div>
@@ -440,10 +434,10 @@
                 Dans le plan de mise en place d'une entreprise, il se pose toujours....
               </div>
               <div class="extra">
-                <div class="ui right floated orange button">
+                <a href='blog.php' class="ui right floated orange button">
                   Lire
                   <i class="right chevron icon"></i>
-                </div>
+                </a>
                 <div class="ui label" id="thumbLikero" style="cursor:pointer" onclick="likero()"><i class="lnr lnr-thumbs-up"></i>57</div>
               </div>
             </div>
@@ -463,10 +457,10 @@
                 Dans le plan de mise en place d'une entreprise, il se pose toujours....
               </div>
               <div class="extra">
-                <div class="ui right floated orange button">
+                <a href='blog.php' class="ui right floated orange button">
                   Lire
                   <i class="right chevron icon"></i>
-                </div>
+                </a>
                 <div class="ui label" id="thumbLikerd" style="cursor:pointer" onclick="likerd()"><i class="lnr lnr-thumbs-up"></i> 89</div>
               </div>
             </div>

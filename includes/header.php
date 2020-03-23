@@ -30,10 +30,10 @@
     <meta name="description" content="La solution au problème de financement de vos projets.">
     <meta name="og:description" content="La solution au problème de financement de vos projets.">
 
-    <meta name="keywords" content="crowndfunding, financement participatif,  financement, participatif, projet, guanxi, investissement, invest, money, argent, web payment, payement en ligne, payement, payment, abodah, crowndlending" />
+    <meta name="keywords" content="crowdfunding, financement participatif,  financement, participatif, projet, guanxi, investissement, invest, money, argent, web payment, payement en ligne, payement, payment, abodah, crowndlending" />
     <meta name="og:url" content="http://localhost/serve/Crowdfunding/">
     <meta name="og:title" content="Abodah Funding">
-    <meta name="og:image" content="http://localhost/serve/Crowdfunding/img/loader.gif">
+    <meta name="og:image" content="http://localhost/serve/Crowdfunding/img/f.png">
     <link id="favicon" rel="shortcut icon" href="../../img/contactUs.png">
     <link rel="apple-touch-icon" sizes="194x194" href="../../img/contactUs.png">
     <link rel="stylesheet" href="../../style/bootstrap/bootstrap.css">
@@ -41,17 +41,15 @@
     <link rel="stylesheet" href="../../style/suiM/semantic.css">
     <link rel="stylesheet" href="../../style/suiM/components/transition.css">
     <link rel="stylesheet" href="../../style/main.css">
+    <link rel="stylesheet" href="../../style/returnOnTop.css">
     <link rel="stylesheet" href="../../style/animate/animate.css">
-    <link rel="stylesheet" href="../../style/imgHover/imagehover.min.css">
+    <link rel="stylesheet" href="../../style/imgHover/imagehover.css">
     <link rel="stylesheet" href="../../style/swal/swal.css">
     <link rel="stylesheet" href="../../style/bootstrap/bootstrapswal.css">
     <link rel="stylesheet" href="../../style/socicon/style.css">
     <link rel="stylesheet" href="../../js/particlesjs/demo/css/style.css">
     <link rel="stylesheet" href="../../style/Linearicons/Linearicons/Web Font/style.css">
     <script src="../../js/wow/wow.js"></script>
-
-
-    
 
     <script>
         $(document)
@@ -73,11 +71,53 @@
     <script src="../../js/swal/swalmin.js"></script>
 
 </head>
+<?php 
+ 
+    if (isset($_SESSION['notification'])){
+      if ($_SESSION['notification']==true){
+    ?>
+        <div onclick="$(this).slideToggle(100)" data-wow-iteration="infinite" data-wow-duration="1500ms"  class="ui wow pulse animated messageNotification <?php echo $_SESSION['notification_status'] ?> message"  style="position:fixed;max-width:400px; z-index:100000000000; bottom:60px; right:15px; "><?php echo $_SESSION['notification_text']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="ui close icon"></i></div>
+    <?php
+       $_SESSION['notification']=false;
+      }
+    }
+
+
+    function formatsimpledate($string, $language,$seprator){
+      $stringEx=explode('-',$string);
+      if($language=='fr'){
+        $year=array('01'=>"Janvier",'02'=>'fevrier','03'=>'mars','04'=>'avril','05'=>'mai','06'=>'juin','07'=>'juillet','08'=>'aout','09'=>'septembre','10'=>'octobre','11'=>'novembre','12'=>'decembre');
+      }elseif($language=='es'){
+        $year=array('01'=>"enero",'02'=>'febrero','03'=>'marso','04'=>'april','05'=>'mayo','06'=>'juno','07'=>'julio','08'=>'augosto','09'=>'septiembre','10'=>'octubre','11'=>'noviembre','12'=>'deciembre');
+      }else{
+        $year=array('01'=>"Janary",'02'=>'febuary','03'=>'march','04'=>'april','05'=>'may','06'=>'june','07'=>'july','08'=>'august','09'=>'september','10'=>'october','11'=>'november','12'=>'december');
+      }
+      return $stringEx[2].$seprator.$year[$stringEx[1]].$seprator.$stringEx[0];
+    }
+    
+    function financer($number,$token,$montant){
+      $url="http://localhost/serve/Crowdfunding/api/api_rest.php?number=$number&token=$token&somme=$montant";
+      $api = @json_decode(file_get_contents($url));
+      if($api){
+          $value=array();
+          if($api->status=="success"){
+              $value=array("status"=>$api->status,"nom"=>$api->nom);
+          }else{
+              $value=array("status"=>$api->status,"message"=>$api->message);
+          }
+      }else{
+          $value=array("status"=>"failed","message"=>"FAil to call the Payment API.");
+      }
+      return $value;
+    }
+
+    function notification($style,$message,$etat){
+
+    }
+
+  ?>
 <body oncontextmenu="contextmenu();return false;" id="gbody" onload="load()">
 
-
-
-  
     <div class="loader forLoad" id="loaderPri">
         <div class="loader-inner">
             <div class="loader-line-wrap">

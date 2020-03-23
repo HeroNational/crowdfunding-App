@@ -42,7 +42,7 @@
           <h2>Toutes les campagnes</h2>
         </div>
       </div>
-    <div style="width: 100%;position: relative; top: -70px;" >
+    <div style="width: 100%;position: relative; top: -70px;" class='ui container'>
     <div 
           style="padding:0px 10px;
                   margin-Top:100px"
@@ -91,76 +91,83 @@
                 39=>"imghvr-zoom-out-flip-vert",
                 40=>"imghvr-blur"
               );
-              $sql=$bdd->query("select * from projet INNER JOIN internaute on internaute.idU=projet.internaute");
-              $idProf=array();
-              $wow=0;
-              while($resultats=$sql->fetch(PDO::FETCH_OBJ)){
-                $posHover=mt_rand(1,39);
+                $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' group by idpro order by f.montant ASC";
+                $execution=$bdd->query($requete);
+                while($resultset=$execution->fetch(PDO::FETCH_OBJ)){
+                  $posHover=mt_rand(1,39);
+                  $sommeacquise=mt_rand(1,1000000);
+                  $requeteS="SELECT sum(montant) as acquis FROM financement where projet='$resultset->idpro'";
+                  $executionS=$bdd->query($requeteS);
+                  $resultsetS=$executionS->fetch(PDO::FETCH_OBJ);
+                  $sommeacquise=$resultsetS->acquis;
+                  $executionS->closecursor();
+            ?>
+            <div class="five wide center aligned column">
+                <div class="ui card">
+                    <figure class=<?php echo $hover[$posHover]?> style="background: url(../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg);background-size:cover;">
+                        <img src="../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg"/>
+                        <figcaption>
+                            <h3><?php echo '<u>'.$resultset->nomProjet.'</u>'?></h3>
+                            <p style="color:white">
+                              <?php echo utf8_decode($resultset->slogan); ?>
+                            </p>
+                        </figcaption>
+                    </figure>
+                    <h1 class="ui header" style="margin-top:-6px">
+                      <?php echo utf8_decode($resultset->nomProjet) ?>
+                    </h1>
+                    <div class="meta">
+                      <?php echo utf8_decode($resultset->slogan) ?>
+                    </div>
+                    <hr>
+                    <span>
+                        <span style="color:#ec4e43">
+                            <?php echo mt_rand(10,365) ; ?>&nbsp;
+                        </span>Jours restants
+                    </span>
+                    <br>
+                    <?php 
+                      $sommetotale=$resultset->objectif;
+                      $per=($sommeacquise*100)/$sommetotale;
+                      $sommetotale=number_format($sommetotale, 0,'.',' ');
+                      $per=number_format($per, 0,'.', '');
+                      
+                    ?>
+                    <br>
+                    <div class=""><?php echo number_format($sommeacquise,0,"."," ").' ('.$per."%) sur <b>".$sommetotale."</b> XAF"; ?></div>
+                    <span class="ui extra">
+                        <span class="ui purple progress active" style="height:13px!important">
+                            <span class="bar" style="width:
+                                  <?php echo ($per=($per<=100)?$per:"100");?>%;background:<?php
+                                      if($per<16.66){
+                                          $theming="217, 92, 92";
+                                      }elseif($per>16.65 and $per <33.33){
+                                          $theming="217, 166, 92";
+                                      }elseif($per>33.32 and $per<49.99){
+                                        $theming="230, 187, 72";
+                                      }elseif($per>49.98 and $per<66.66){
+                                        $theming="221, 201, 40";
+                                      }elseif($per>66.65 and $per<83.33){
+                                        $theming="180, 217, 92";
+                                      }elseif($per>83.32 and $per<95.33){
+                                          $theming="91, 189, 114, 0.671";
+                                      }else{
+                                        $theming="91, 189, 114";
+                                      }
+                                      echo "rgba(".$theming.")";
+                                  ?>!important;  height:6px">
+                                <span class="progress"></span>
+                            </span>
+                        </span>
+                    </span>
+                    <a href="financement.php?<?php echo 'token='.str_shuffle("erfwfkfewhfewafwegswefhbewgjhwageg24354geGFE4w2ga4aew54erg3gaerg5").'&prodhgdthtrhydtrtrjutydrhrthwee='.$resultset->idpro.'&kind='.str_shuffle("erfg24354geGFE4w2ga4aew54erg3gaerg5") ?>"   class="ui button orange fluid" style="padding:-5px 3px!important">Financer</a>
+                
+                </div>
+            </div>
+          <?php 
+            }
+            $execution->closecursor();
           ?>
-          <div class="three wide column">
-              <div class="ui card">
-                  <figure class=<?php echo $hover[$posHover]?> style="background:url(<?php echo $img='../../img/imgprojet/'.$resultats->image.'.jpg';?>); background-position-x:center; background-size:cover;">
-                      <img src="<?php echo $img='../../img/imgprojet/'.$resultats->image.'.jpg';?>" alt="Montant visé <?php echo $resultats->objectif;?>" style='min-height:200px'/>
-                      <figcaption>
-                          <h3><?php echo $resultats->nomProjet ?></h3>
-                          <p style="color:white">
-                            la première plateforme camerounaise de covoiturage
-                          </p>
-                      </figcaption>
-                  </figure>
-                  <h1 class="ui header" style="margin-top:-6px"><?php echo $resultats->nomProjet ?></h1>
-                  <div class="meta">
-                  <?php echo $resultats->slogan ?>
-                  </div>
-                  <hr>
-                  <span>
-                      <span style="color:#ec4e43">
-                          <?php echo mt_rand(10,365) ; ?>&nbsp;
-                      </span>Jours restants
-                  </span>
-                  <br>
-                  <?php 
-                    $sommetotale=$resultats->objectif;;
-                    $sommeacquise=mt_rand(0,400);
-                    $per=($sommeacquise*100)/$sommetotale;
-                    $sommetotale=number_format($sommetotale, 0,'.',' ');
-                    $per=number_format($per, 0,'.', '');
-                    
-                  ?>
-                  <br>
-                  <div class=""><?php echo $per=($per<=100)?$per:"100"; echo " %". " de <b>".$sommetotale."</b> XAF"; ?></div>
-                  <span class="ui extra">
-                      <span class="ui purple progress active" style="height:13px!important">
-                          <span class="bar" style="width:
-                                <?php echo ($per);?>%;background:<?php
-                                    if($per<16.66){
-                                        $theming="217, 92, 92";
-                                    }elseif($per>16.65 and $per <33.33){
-                                        $theming="217, 166, 92";
-                                    }elseif($per>33.32 and $per<49.99){
-                                      $theming="230, 187, 72";
-                                    }elseif($per>49.98 and $per<66.66){
-                                      $theming="221, 201, 40";
-                                    }elseif($per>66.65 and $per<83.33){
-                                      $theming="180, 217, 92";
-                                    }elseif($per>83.32 and $per<95.33){
-                                        $theming="91, 189, 114, 0.671";
-                                    }else{
-                                      $theming="91, 189, 114";
-                                    }
-                                    echo "rgba(".$theming.")";
-                                ?>!important;  height:6px">
-                              <span class="progress"></span>
-                          </span>
-                      </span>
-                  </span>
-                  <form action="financement.php?id"><input type="hidden" name="projet" value="<?php echo ""; ?>"><button type="submit"  class="ui button orange fluid" style="padding:-5px 3px!important"><span class="lnr lnr-plus-circle"></span> Financer</button></form>
-              
-              </div>
-          </div>
-        <?php 
-        }
-        ?>
    
     </div>
               <style>

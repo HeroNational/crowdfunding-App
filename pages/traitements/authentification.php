@@ -1,17 +1,21 @@
 <?php
     include_once("../../includes/connexionBd.php");
 
+    session_destroy();
+    session_unset();
     $email=$_SESSION['email']=trim(utf8_encode($_POST['emailI']));
     $password=$_SESSION['password']=trim(utf8_encode($_POST['passwordI']));
     $nom=$_SESSION['nom']=trim(utf8_encode($_POST['nomI']));
     $prenom=$_SESSION['prenom']=trim(utf8_encode($_POST['prenomI']));
     $sexe=$_SESSION['sexe']=trim(utf8_encode($_POST['sexeI']));
+    $description=$_SESSION['description']=isset($_POST['descriptionI'])?trim(utf8_encode($_POST['descriptionI'])):"";
     if(isset($_POST["captcha"])){
       if($_POST['captcha']==$_SESSION["captcha"]){
         if (isset($_POST['emailI'],$_POST['passwordI'])){
       
-          //$emailSh=trim(utf8_encode($emailSh[0].''.$emailSh[1]);
-          //$emailSh=explode('.',$emailSh);
+          $emailSh=explode('.',$emailSh);
+          $emailSh=trim(utf8_encode($emailSh[0]));
+          $emailSh=explode('@',$emailSh);
           $emailSh=trim(utf8_encode($emailSh[0]));
           $image=$token=trim(utf8_encode(str_shuffle($emailSh.''.$nom.''.$prenom.'PusSiuAShhAjWQUXSJK84758szsdg44sddgaf00495zsrefkk')));
           $testT=0;
@@ -55,7 +59,7 @@
 
             if($testT!=1){
               $date=date('o-m-d');
-              $requette=$bdd->query("INSERT INTO `internaute` (`idu`, `email`, `nom`, `prenom`, `password`, `sexe`, `token`, `etat`,`date`) VALUES (NULL, '$email','$nom','$prenom','$password','$sexe','$token', '1','$date')");
+              $requette=$bdd->query("INSERT INTO `internaute` (`idu`, `email`, `nom`, `prenom`, `password`, `sexe`, `token`, `etat`,`date`,description) VALUES (NULL, '$email','$nom','$prenom','$password','$sexe','$token', '1','$date','$description')");
       
               $requette=$bdd->query("select * from internaute where email like '$email' and password  like '$password'");
               while($resultat=$requette->fetch(PDO::FETCH_OBJ)){
@@ -66,6 +70,8 @@
                     $_SESSION['token']=trim($resultat->token);
                     $_SESSION['email']=trim($resultat->email);
                     $_SESSION['etat']=trim($resultat->etat);
+                    $_SESSION['sexe']=trim($resultat->sexe);
+                    $_SESSION['description']=trim($resultat->description);
                   }
                       
               }

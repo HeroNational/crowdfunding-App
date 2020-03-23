@@ -14,7 +14,7 @@
         height: 100%;
       }
       .columnForm {
-        max-width: 450px;
+        max-width: 1050px;
       }
     </style>
     <body>
@@ -40,6 +40,7 @@
                                     <span class="lnr lnr-picture" style="background:white; border-radius:50%;"></span>
                                   </span>
                                   <img src="../../img/imguser/default.png" alt="Votre photo de profil" class="ui image circular" style="height:100px; width:100px;border:2px solid teal; padding:0px 1px;">
+                                  <span class="ui top pointing label disabled green">Choisissez une photo de profil</span>
                                 </center>
                               </label>
                               <input type="file" name="image" accept="image/*" style="display:none" id="imager">
@@ -55,7 +56,7 @@
                                   </span>
                                 </div>
                                 <div class="ui left icon input">
-                                  <input type="text" name="prenomI" value="<?php echo isset($_SESSION['prenom'])?$_SESSION['prenom']:""; ?>" required="required" placeholder="Prenom">
+                                  <input type="url" name="prenomI" value="<?php echo isset($_SESSION['prenom'])?$_SESSION['prenom']:""; ?>" required="required" placeholder="Prenom">
                                 </div>
                               </div>
 
@@ -73,30 +74,32 @@
 
                             </div>
                             
-                            <div class="field">
-                              <div style="float: left; margin-bottom:5px;">
-                                <i class="ui lock icon red"></i>
-                                <span class="ui">
-                                  Mot de passe
-                                </span>
-                              </div>
-                              <div class="ui left icon input">
-                                <input type="password" name="passwordI" value=""  required="required" placeholder="Mot de passe">
-                              </div>
-                            </div>
-                            <div class="ui horizontal divider"></div>
-                            <div class="field">
-                              <div style="float: left; margin-bottom:5px;">
-                                <i class="ui mail icon blue"></i>
-                                <span class="ui">
-                                  Email
-                                </span>
-                              </div>
-                              <div class="ui left icon input">
-                                <input type="email" name="emailI" required="required" placeholder="E-mail" value="<?php echo isset($_SESSION['email'])?$_SESSION['email']:""; ?>">
-                              </div>
-                            </div>
+                            <div class="two fields">
 
+                              <div class="field">
+                                <div style="float: left; margin-bottom:5px;">
+                                  <i class="ui lock icon red"></i>
+                                  <span class="ui">
+                                    Mot de passe
+                                  </span>
+                                </div>
+                                <div class="ui left icon input">
+                                  <input type="password" name="passwordI" value=""  required="required" placeholder="Mot de passe">
+                                </div>
+                              </div>
+                              <div class="field">
+                                <div style="float: left; margin-bottom:5px;">
+                                  <i class="ui mail icon blue"></i>
+                                  <span class="ui">
+                                    Email
+                                  </span>
+                                </div>
+                                <div class="ui left icon input">
+                                  <input type="email" name="emailI" required="required" placeholder="E-mail" value="<?php echo isset($_SESSION['email'])?$_SESSION['email']:""; ?>">
+                                </div>
+                              </div>
+ 
+                            </div>
                             <div class="field">
                               <div style="float: left; margin-bottom:5px;">
                                 <i class="ui icon group  green"></i>
@@ -112,7 +115,18 @@
                               </div>
                             </div>
 
-                      
+                            <div class="field">
+                              <div style="float: left; margin-bottom:5px;">
+                                <i class="ui icon book purple"></i>
+                                <span class="ui">
+                                  Biographie
+                                </span>
+                              </div>
+                              <div class="ui left icon input labeled">
+                                <textarea name="descriptionI" placeholder="En quelques mots pqrlez de vous." id=""></textarea>
+                              </div>
+                            </div>
+
                             <div class="ui horizontal divider"></div>
                             <div class="field">
                               <div style="float: left; margin-bottom:5px;">

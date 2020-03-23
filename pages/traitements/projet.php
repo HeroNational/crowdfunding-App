@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include("../../includes/connexionBd.php");
     $image=mt_rand(1,10000001221);
     $nom=$_POST['nom'];
@@ -42,18 +41,36 @@
       }
     $values=array(
         'nom'=>$nom,
-        'categorie'=>utf8_encode($categorie),
-        'objectif'=>utf8_encode($objectif),
-        'slogan'=>utf8_encode($slogan),
-        'description'=>utf8_encode($description),
-        'duree'=>utf8_encode($duree),
-        'image'=>utf8_encode($image),
-        'id'=>utf8_encode($id),
-        'date'=>utf8_encode($date)
+        'categorie'=>utf8_encode(strval($categorie)),
+        'objectif'=>utf8_encode(strval($objectif)),
+        'slogan'=>utf8_encode(strval($slogan)),
+        'description'=>utf8_encode(strval($description)),
+        'duree'=>utf8_encode(strval($duree)),
+        'image'=>utf8_encode(strval($image)),
+        'id'=>utf8_encode(strval($id)),
+        'date'=>utf8_encode(strval($date))
     );
 
-    $submitProject=$bdd->prepare("INSERT INTO projet (nomProjet, categorie,objectif,slogan, description,duree,image,etat,internaute,date) VALUES (:nom,:categorie,:objectif,:slogan,:description,:duree,:image,0,:id,:date)");
+    $submitProject=$bdd->prepare("INSERT INTO projet (nomProjet, categorie,objectif,slogan, descriptionProjet,duree,image,etat,internaute,date) VALUES (:nom,:categorie,:objectif,:slogan,:description,:duree,:image,0,:id,:date)");
     $submitProject->execute($values);
+    
+    
+    $nom=$nom;
+    $categorie=utf8_encode($categorie);
+    $objectif=utf8_encode($objectif);
+    $slogan=utf8_encode($slogan);
+    $description=utf8_encode($description);
+    $duree=utf8_encode($duree);
+    $image=utf8_encode($image);
+    $id=utf8_encode($id);
+    $date=utf8_encode($date);
+
+    $selectProject=$bdd->query("SELECT idpro FROM projet WHERE nomProjet like '$nom' and objectif like '$objectif' and  slogan like '$slogan' and  descriptionProjet like '$description' and duree like '$duree' and  image like '$image' and etat like '0' and internaute like '$id' and date like '$date'");
+    while($result=$selectProject->fetch()){
+      $idProject=$result['idpro'];
+    }
+    
+    $bdd->query("INSERT INTO `financement` (`internaute`, `projet`, `montant`) VALUES ('1', '$idProject', '0');");
 
     if($submitProject){
         $_SESSION['notification']=true;

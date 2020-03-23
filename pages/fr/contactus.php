@@ -66,7 +66,7 @@
                           <div class="field">
                             <div class="ui left icon input">
                               <label for="" style="float: left; color:rgba(0,0,0,0.5)">Votre message</label><br><br>
-                                <textarea name="texte" placeholder="Votre message"> </textarea>
+                                <textarea name="texte" required="required" placeholder="Votre message" value=''></textarea>
                             </div>
                           </div>
                           <div class="field">        

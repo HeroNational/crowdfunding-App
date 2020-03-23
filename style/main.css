@@ -34,7 +34,6 @@ body{
         bottom:0
     }
     .loader{
-        background:#000;
         background:radial-gradient(rgb(56, 56, 56),rgb(0, 0, 0));
         bottom:0;
         left:0;

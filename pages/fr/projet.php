@@ -6,12 +6,17 @@
     <?php 
       $index="entreprendre"; include("../../includes/header.php");
       include("../../includes/connexionBd.php"); 
-      if(!isset($_SESSION['id'])){
+      if(!isset($_SESSION['nom'])){
         $_SESSION['submint_project']=true;
         $_SESSION['notification']=true;
         $_SESSION['notification_text']="Veillez vous connecter pour soumettre vos projets.";
         $_SESSION['notification_status']="info";
         header("location: inscription.php");
+      }else{
+        $_SESSION['submint_project']=true;
+        $_SESSION['notification']=true;
+        $_SESSION['notification_text']="Vous etes connectes en tant que ".$_SESSION['prenom']." ".$_SESSION['nom'];
+        $_SESSION['notification_status']="info";
       }
     ?>
     <section id="helm" class="wow fadeIn">
@@ -53,9 +58,9 @@
 
                       <div class="ui field">
                         <label for="" style="float:left; font-weight:100"><i class=" orange picture icon"></i> Image représentative du projet</label>
-                        <br style="margin:3px;">
+                        <br style="margin:3px;"><br>
                         <label for="imagefile" style="color:white" class="ui button large fluid teal">Sélctionnez le fichier</label>
-                        <input type="file" name="image" accept="image/*" id="imagefile" style="display:none">
+                        <input type="file" name="image" required="required" accept="image/*" id="imagefile" style="opacity:0">
                       </div>
                       
                       <div class="field">

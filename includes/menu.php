@@ -13,11 +13,15 @@
         $tetsPres=1;
         if($resultat->etat!=0){
           $_SESSION['id']=$resultat->idu;
-          $_SESSION['nom']=$resultat->nom;
-          $_SESSION['prenom']=$resultat->prenom;
-          $_SESSION['token']=$resultat->token;
-          $_SESSION['email']=$resultat->email;
-          $_SESSION['etat']=$resultat->etat;
+          $_SESSION['id']=trim($resultat->idu);
+          $_SESSION['nom']=trim($resultat->nom);
+          $_SESSION['prenom']=trim($resultat->prenom);
+          $_SESSION['token']=trim($resultat->token);
+          $_SESSION['email']=trim($resultat->email);
+          $_SESSION['etat']=trim($resultat->etat);
+          $_SESSION['sexe']=trim($resultat->sexe);
+          $_SESSION['password']=trim($resultat->password);
+          $_SESSION['description']=trim($resultat->description);
 
           $_SESSION['notification']=true;
           $_SESSION['notification_text']="Vous etes connectes au nom de ".$_SESSION['nom'];
@@ -142,7 +146,7 @@
                       </div>
                     </form>
                     <div class="ui message">
-                      Vous êtes nouveau? <a href="#" onclick="closemodalcon(); modallog();" style="letter-spacing:0px;"><span style="color:rgb(66, 146, 12); font-size:x-large">+</span> Inscription</a>
+                      Vous êtes nouveau? <a href="inscription.php" onclick="closemodalcon(); modallog();" style="letter-spacing:0px;"><span style="color:rgb(66, 146, 12); font-size:x-large">+</span> Inscription</a>
                     </div>
                   </div>
                 </div>
@@ -172,28 +176,15 @@
               </div>
               
             </div>
-            <?php }?>
+            <?php }
+            
+            if (isset($_SESSION['notification'])){
+              if ($_SESSION['notification']==true){
+            ?>
+              <div onclick="$(this).slideToggle(100)" data-wow-iteration="infinite" data-wow-duration="1500ms"  class="ui wow pulse animated messageNotification <?php echo $_SESSION['notification_status'] ?> message"  style="position:fixed;max-width:400px; z-index:100000000000; bottom:60px; right:15px; cursor:default"><?php echo $_SESSION['notification_text']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="ui close icon"></i></div>
+            <?php
+              $_SESSION['notification']=false;
+              }
+            }?>
         </div>
     </section>
-
-    <script>
-      function textMonter(){
-        var valeurActuelle=$('#montant').val();
-        valeurVraie=0;
-        if (is_int(valeurActuelle)){
-          valeurVraie=valeurActuelle;
-        }
-        $('#montant').append(valeurActuelle);
-      }
-    </script>
-    <?php 
-    if (isset($_SESSION['notification'])){
-      if ($_SESSION['notification']==true){
-    ?>
-      <div onclick="$(this).slideToggle(100)"  class="ui  messageNotification <?php echo $_SESSION['notification_status'] ?> message"  style="position:fixed;max-width:400px; z-index:100000000000; bottom:20px; right:9px; "><?php echo $_SESSION['notification_text']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="ui close icon"></i></div>
-    <?php
-       $_SESSION['notification']=false;
-      }
-    }
-    
-    ?>

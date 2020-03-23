@@ -28,15 +28,47 @@
     }
 
     $id=$_SESSION['id'];
-    $submitProject=$bdd->query("UPDATE internaute set nom='$nom', prenom='$prenom',email='$email',password='$password',sexe='$sexe' where idU=$id");
+
+    $emailSh=explode('.',$email);
+    $emailSh=trim(utf8_encode($emailSh[0]));
+    $emailSh=explode('@',$emailSh);
+    $emailSh=trim(utf8_encode($emailSh[0]));
+    $image=$token=trim(utf8_encode(str_shuffle($emailSh.''.$nom.''.$prenom.'PusSiuAShhAjWQUXSJK84758szsdg44sddgaf00495zsrefkk')));
+
+    if (isset($_FILES['image']) AND $_FILES['image']['error'] == 0) {
+        if ($_FILES['image']['size'] <= 20000000) {
+            $infosfichier = pathinfo($_FILES['image']['name']);
+            $infosfichier['extension']="jpg";
+            $extension_image = $infosfichier['extension'];
+            $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
+            if (in_array($extension_image, $extensions_permises)){
+                move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.$extension_image );
+            }
+        }else{
+            $_SESSION['notification']=true;
+            $_SESSION['notification_text']="Il y a eu unee erreur qui a interrompu votre inscription.";
+            $_SESSION['notification_status']="error";
+            header("location: ../fr");
+        }
+    }
+    if(isset($_FILES['image'])){
+        $submitProject=$bdd->query("UPDATE internaute set nom='$nom', prenom='$prenom',email='$email',password='$password',sexe='$sexe',token='$token' where idU=$id");
+    }else{
+        $submitProject=$bdd->query("UPDATE internaute set nom='$nom', prenom='$prenom',email='$email',password='$password',sexe='$sexe' where idU=$id");
+    }
     if($submitProject){
         $_SESSION['notification']=true;
         $_SESSION['notification_text']="Vos informations sont desormais a jour.";
         $_SESSION['notification_status']="positive";
 
-        echo $_SESSION['nom']=$nom;
-        echo $_SESSION['prenom']=$prenom;
-        echo $_SESSION['email']=$email;
+        $_SESSION['id']=trim($id);
+        $_SESSION['nom']=trim($nom);
+        $_SESSION['prenom']=trim($prenom);
+        $_SESSION['token']=trim($token);
+        $_SESSION['email']=trim($email);
+        $_SESSION['etat']=trim($etat);
+        $_SESSION['sexe']=trim($sexe);
+        $_SESSION['description']=trim($description);
         //unset($GLOBALS);
         header("location: ../fr");
     }else{
