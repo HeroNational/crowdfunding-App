@@ -81,6 +81,15 @@
 
       <div class="ui stackable grid center aligned">
         <div class="ui six wide column">
+        
+          <?php
+              $dateN=date("y-m-d");
+
+              $sqlB="SELECT duree FROM projet WHERE idPro like '$idProjet' and duree>='$dateN'";
+              $stmt=$bdd->query($sqlB);
+              while($datert=$stmt->fetch(PDO::FETCH_OBJ)) $datery=$datert->duree;
+              if(isset($datery)){
+          ?>
           <div class="ui header teal">Finacer ce projet </div>
           <center>
             <form class="ui large form" action="" method="POST" style="max-width:370px;">
@@ -118,26 +127,21 @@
                 </div>
                 <input type="hidden" name="projet" value="<?php echo utf8_decode($idProjet);?>">
                 <input type="hidden" name="financeur" value="<?php (isset($_SESSION['id']))?$_SESSION['id']:null ?>">
-                <?php
-                  $sqlB="SELECT date FROM projet WHERE idPro like '$idProjet'";
-                  $stmt=$bdd->query($sqlB);
-                  while($datert=$stmt->fetch(PDO::FETCH_OBJ)) $datery=$datert->date;
-                  if($datery<date("o-m-j")){
-                ?>
-                  <button class="ui fluid large red submit button" <?php echo "disabled "?>>Valider</button>
-                <?php
-                  }else{
-                ?>
-                  <button class="ui fluid large teal submit button">Valider</button>
-                <?php
-                  }
-                ?>
+                <button class="ui fluid large teal submit button">Valider</button>
+              
               </div>
             </form>
           </center>
 
-        </div>
 
+          <?php
+            }else{
+          ?>
+            <div class="ui message red">Campagne terminee.</div>
+          <?php
+            }
+          ?>
+        </div>
 
         <div class="ui five wide column left aligned">
           <div class="ui grid">

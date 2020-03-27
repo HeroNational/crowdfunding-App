@@ -123,7 +123,8 @@
               39=>"imghvr-zoom-out-flip-vert",
               40=>"imghvr-blur"
             );
-            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' group by idpro order by p.idpro DESC  limit 3";
+            $dateN=date("y-m-d");
+            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' and p.duree>='$dateN' group by idpro order by p.idpro DESC  limit 3";
             $execution=$bdd->query($requete);
               while($resultset=$execution->fetch(PDO::FETCH_OBJ)){
                 $posHover=mt_rand(1,39);
@@ -154,7 +155,13 @@
                   <hr>
                   <span>
                       <span style="color:#ec4e43">
-                          <?php echo mt_rand(10,365) ; ?>&nbsp;
+                      <span style="color:#ec4e43">
+                            <?php     
+                                $diff=date_diff(date_create(date("y-m-d")),date_create(utf8_decode($resultset->duree)));
+                                echo $diff->format("%a"); 
+                            ?>
+                            &nbsp;
+                        </span>
                       </span>Jours restants
                   </span>
                   <br>

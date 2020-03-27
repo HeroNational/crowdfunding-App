@@ -22,12 +22,14 @@ DROP TABLE IF EXISTS `compte`;
 
 CREATE TABLE `compte` (
   `id` varchar(35) COLLATE utf8_croatian_mysql561_ci NOT NULL,
-  `solde` decimal(10,0) NOT NULL,
+  `solde` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `compte_ibfk_1` FOREIGN KEY (`id`) REFERENCES `utilisateur` (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_mysql561_ci;
 
 /*Data for the table `compte` */
+
+insert  into `compte`(`id`,`solde`) values ('237657675216',1),('675120936',3999997),('677881982',1);
 
 /*Table structure for table `utilisateur` */
 
@@ -41,7 +43,7 @@ CREATE TABLE `utilisateur` (
 
 /*Data for the table `utilisateur` */
 
-insert  into `utilisateur`(`nom`,`phone`) values ('8uuikigkuik','');
+insert  into `utilisateur`(`nom`,`phone`) values ('Daniel Fokou','237657675216'),('iwerwefojwdfvwaefiufdvsdfgsergweagfgfrnherg5454y5f45y54ttg54y54erw45ye4tg5yvgy5serergresag34t3445tt5454erst5ty5rtgrtg54g63rtg4rg56erg56hgytet4h5rthy6rthrtgb65rth','675120936'),('Mbarga','677881982');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

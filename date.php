@@ -1,14 +1,8 @@
 <?php
 
+    $diff=date_diff(date_create("2020-9-1"),date_create("2020-8-25"));
+echo $diff->format("%a jours");
 
-    $datej="2020-1-1";
-    $dated="2021-10-1";
-    $month=0;
-    $nbrm=0;
-    $days=0;
-    $datej=explode('-',$datej);
-    $dated=explode('-',$dated);
+    //print_r(differencedate($datej,$dated));
 
-    
-    
 ?>

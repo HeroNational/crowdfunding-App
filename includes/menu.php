@@ -162,7 +162,7 @@
             
             <div  id="particles-js">
               <div style="position:relative; top:400px;">
-                <h1>Abodah Funding</h1>
+                <h1>Abodah <span class="ui green header">Funding</span></h1>
                 <h3 class="light white"></h3>
                 <h2 class="">Le financement meilleur de vos projets.</h2>
                 <a href="projet.php" class="btn-get-started scrollto">Nouveau projet</a>
