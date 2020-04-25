@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr"  style="overflow-x:hidden">
 <head>
     <title>Abodah Funding</title>
     <?php ?>
@@ -246,7 +246,7 @@
     </div>
     <section class="text-center wow fadeInUp">
 
-        <div class="container">
+        <div class="ui container">
           <div class="section-title text-center">
     
             <h2>Nos atouts </h2>
@@ -266,7 +266,7 @@
     
               </div>
             </div>
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 ui container ">
                 <div class="feature-block">
                   <img src="../../img/community.svg" class="img-fluid">
                   <h4>Notre communauté</h4>

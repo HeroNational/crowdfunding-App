@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" style="overflow-x:hidden">
 <head>
     
     <?php $index="profil"; include("../../includes/header.php"); ?>
@@ -169,20 +169,18 @@
                     }else{
                         $value=$_SESSION['token'];
                     }
-                    if($_GET['ustreetyauijdnnn8isk']){
-                        $sql="SELECT * FROM internaute WHERE token like '$value'";
-                        $stmt=$bdd->query($sql);
-                        while($resultat=$stmt->fetch(PDO::FETCH_OBJ)){
-                            $idut=$resultat->idu;
-                            $nom=$resultat->nom;
-                            $prenom=$resultat->prenom;
-                            $token=$resultat->token;
-                            $email=$resultat->email;
-                            $description=$resultat->description;
-                            $sexe=$resultat->sexe;
-                            $date=$resultat->date;
+                    $sql="SELECT * FROM internaute WHERE token like '$value'";
+                    $stmt=$bdd->query($sql);
+                    while($resultat=$stmt->fetch(PDO::FETCH_OBJ)){
+                        $idut=$resultat->idu;
+                        $nom=$resultat->nom;
+                        $prenom=$resultat->prenom;
+                        $token=$resultat->token;
+                        $email=$resultat->email;
+                        $description=$resultat->description;
+                        $sexe=$resultat->sexe;
+                        $date=$resultat->date;
                         }
-                    }
                 ?>
 
                 
@@ -331,7 +329,7 @@
                                     <strong>
                                         <img class="ui avatar image" src="<?php echo '../../img/imgprojet/'.utf8_decode($res->image).'.jpg'; ?>" alt="">
                                         &nbsp;&nbsp;&nbsp;
-                                        <?php echo utf8_decode($res->nomProjet).' '.$idut; ?>
+                                        <?php echo utf8_decode($res->nomProjet)?>
                                     </strong>
                                 </td>
                                 <td> <?php echo utf8_decode($res->descriptionProjet); ?></td>
@@ -355,7 +353,7 @@
             <?php
                     }else{
             ?>
-                  <h4 class="ui center aligned header"><span class="ui center aligned header teal"><?php echo utf8_decode($prenom.' '.$nom); ?></span> n'a pas encore soumis aucun projet</h4>
+                  <h4 class="ui center aligned header"><span class="ui center aligned header teal" style="letter-spacing:0px;"><?php echo utf8_decode($prenom.' '.$nom); ?></span> n'a encore soumis aucun projet</h4>
                   </div>
             <?php
                     }

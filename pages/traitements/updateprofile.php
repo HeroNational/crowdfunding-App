@@ -1,4 +1,5 @@
 <?php 
+session_start();
     include("../../includes/connexionBd.php");
     $email=$_POST['email'];
     $nom=$_POST['nom'];
@@ -21,7 +22,7 @@
             $_SESSION['notification_text']="Cette adresse email est utilisee par un autre utilisateur.";
             $_SESSION['notification_status']="error";
             $_SESSION['mail']=true;
-            header("location: ../fr/profil.php?state=2");
+            header("location: ../fr/profil.php?state=1&ustreetyauijdnnn8isk=$resultat->token");
             $execution->closecursor();
             exit();
         }
@@ -42,11 +43,11 @@
             $extension_image = $infosfichier['extension'];
             $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
             if (in_array($extension_image, $extensions_permises)){
-                move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.$extension_image );
+                move_uploaded_file($_FILES['image']['tmp_name'], '../../../img/imguser/'.$image.'.jpg' );
             }
         }else{
             $_SESSION['notification']=true;
-            $_SESSION['notification_text']="Il y a eu unee erreur qui a interrompu votre inscription.";
+            $_SESSION['notification_text']="Il y a eu une erreur qui a interrompu votre inscription.";
             $_SESSION['notification_status']="error";
             header("location: ../fr");
         }
@@ -66,11 +67,9 @@
         $_SESSION['prenom']=trim($prenom);
         $_SESSION['token']=trim($token);
         $_SESSION['email']=trim($email);
-        $_SESSION['etat']=trim($etat);
         $_SESSION['sexe']=trim($sexe);
-        $_SESSION['description']=trim($description);
         //unset($GLOBALS);
-        header("location: ../fr");
+        header("location: ../fr/profil.php?state=1&ustreetyauijdnnn8isk=$resultat->token");
     }else{
         $_SESSION['notification']=true;
         $_SESSION['notification_text']="Une erreur s'est produite.";

@@ -1,17 +1,17 @@
 <?php 
     include("../../includes/connexionBd.php");
-    $email=$_POST['emailn'];
+    if(isset($_POST['emailn'])){
+        $email=$_POST['emailn'];
 
-    $sql="SELECT email FROM newsletter WHERE email='$email'";
-    $execution=$bdd->query($sql);
-    while($execution->fetch()){
-        $_SESSION['notification']=true;
-        $_SESSION['notification_text']="Vous avez deja une inscription valide.";
-        $_SESSION['notification_status']="positive";
-        $_SESSION['mail']=true;
-        header("location: ../fr");
-    }
-    if(isset($_SESSION['mail'])){
+        $sql="SELECT email FROM newsletter WHERE email='$email'";
+        $execution=$bdd->query($sql);
+        while($execution->fetch()){
+            $_SESSION['notification']=true;
+            $_SESSION['notification_text']="Vous avez deja une inscription valide.";
+            $_SESSION['notification_status']="positive";
+            $_SESSION['mail']=true;
+            header("location: ../fr");
+        }
         $values=array(
             'email'=>utf8_encode($email),
         );
@@ -22,7 +22,6 @@
             $_SESSION['notification_text']="Vous recevrez desormais des mails mensuels vous informant sur la plateforme.";
             $_SESSION['notification_status']="info";
             //unset($GLOBALS);
-            header("location: ../fr");
         }else{
             
             $_SESSION['notification']=true;
@@ -30,5 +29,6 @@
             $_SESSION['notification_status']="error";
         }
     }
+    header("location: ../fr");
 
 ?>

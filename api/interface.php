@@ -151,7 +151,7 @@
       </div>
       
     <?php }?>
-      <div class="ui nine wide column left aligned" style="float:right; margin-right:84px;top:0px">
+      <div class="ui nine wide column left aligned" style="float:right; margin-right:135px;top:0px">
         <div class="ui stacked segment">
           <h1 class="ui header teal"> Plateforme</h1>
           <div class="ui message positive">

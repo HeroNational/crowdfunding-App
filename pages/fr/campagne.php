@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" style="overflow-x:hidden">
 <head>
     <title>Toutes les campagnes</title>
     
@@ -91,7 +91,7 @@
                 39=>"imghvr-zoom-out-flip-vert",
                 40=>"imghvr-blur"
               );
-              $dateN=date("y-m-d");
+                $dateN=date("y-m-d");
                 $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' and p.duree>='$dateN' group by idpro order by f.montant ASC";
                 $execution=$bdd->query($requete);
                 while($resultset=$execution->fetch(PDO::FETCH_OBJ)){

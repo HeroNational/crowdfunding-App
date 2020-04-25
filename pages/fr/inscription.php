@@ -1,5 +1,6 @@
+<?php session_start() ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" style="overflow-x:hidden">
 <head>
     <title>Inscription</title>
     
@@ -56,7 +57,7 @@
                                   </span>
                                 </div>
                                 <div class="ui left icon input">
-                                  <input type="url" name="prenomI" value="<?php echo isset($_SESSION['prenom'])?$_SESSION['prenom']:""; ?>" required="required" placeholder="Prenom">
+                                  <input type="text" name="prenomI" value="<?php echo isset($_SESSION['prenom'])?$_SESSION['prenom']:""; ?>" required="required" placeholder="Prenom">
                                 </div>
                               </div>
 
@@ -123,7 +124,7 @@
                                 </span>
                               </div>
                               <div class="ui left icon input labeled">
-                                <textarea name="descriptionI" placeholder="En quelques mots pqrlez de vous." id=""></textarea>
+                                <textarea name="descriptionI" placeholder="En quelques mots parlez de vous." id=""></textarea>
                               </div>
                             </div>
 

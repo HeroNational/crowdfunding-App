@@ -40,7 +40,6 @@
     <link rel="stylesheet" href="../../style/eStartup/eStartup.css">
     <link rel="stylesheet" href="../../style/suiM/semantic.css">
     <link rel="stylesheet" href="../../style/suiM/components/transition.css">
-    <link rel="stylesheet" href="../../style/main.css">
     <link rel="stylesheet" href="../../style/returnOnTop.css">
     <link rel="stylesheet" href="../../style/animate/animate.css">
     <link rel="stylesheet" href="../../style/imgHover/imagehover.css">
@@ -50,6 +49,7 @@
     <link rel="stylesheet" href="../../js/particlesjs/demo/css/style.css">
     <link rel="stylesheet" href="../../style/Linearicons/Linearicons/Web Font/style.css">
     <script src="../../js/wow/wow.js"></script>
+    <link rel="stylesheet" href="../../style/maine.css"> 
 
     <script>
         $(document)
@@ -72,16 +72,6 @@
 
 </head>
 <?php 
- 
-    if (isset($_SESSION['notification'])){
-      if ($_SESSION['notification']==true){
-    ?>
-        <div onclick="$(this).slideToggle(100)" data-wow-iteration="infinite" data-wow-duration="1500ms"  class="ui wow pulse animated messageNotification <?php echo $_SESSION['notification_status'] ?> message"  style="position:fixed;max-width:400px; z-index:100000000000; bottom:60px; right:15px; "><?php echo $_SESSION['notification_text']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="ui close icon"></i></div>
-    <?php
-       $_SESSION['notification']=false;
-      }
-    }
-
 
     function formatsimpledate($string, $language,$seprator){
       $stringEx=explode('-',$string);
@@ -110,9 +100,16 @@
       }
       return $value;
     }
+    require_once("notification_financement.php");
 
-    function notification($style,$message,$etat){
-
+ 
+    if (isset($_SESSION['notification'])){
+      if ($_SESSION['notification']==true){
+    ?>
+        <div onclick="$(this).slideToggle(100)" data-wow-iteration="infinite" data-wow-duration="1500ms"  class="ui wow pulse animated messageNotification <?php echo $_SESSION['notification_status'] ?> message"  style="position:fixed;max-width:400px; z-index:100000000000; bottom:60px; right:15px; "><?php echo $_SESSION['notification_text']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="ui close icon"></i></div>
+    <?php
+       $_SESSION['notification']=false;
+      }
     }
 
   ?>

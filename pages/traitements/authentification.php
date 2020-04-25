@@ -1,8 +1,48 @@
 <?php
-    include_once("../../includes/connexionBd.php");
 
-    session_destroy();
-    session_unset();
+
+  $urlConnexionBd="../../includes/connexionBd.php";
+  include_once($urlConnexionBd);
+  
+  session_start();
+
+  function connect($mail,$password,$bdd){
+    $requette=$bdd->query("select * from internaute where email like '$mail' and password  like '$password'");
+    $tetsPres=0;
+    while($resultat=$requette->fetch(PDO::FETCH_OBJ)){
+      $tetsPres=1;
+      if($resultat->etat!=0){
+        $_SESSION['id']=$resultat->idu;
+        $_SESSION['id']=trim($resultat->idu);
+        $_SESSION['nom']=trim($resultat->nom);
+        $_SESSION['prenom']=trim($resultat->prenom);
+        $_SESSION['token']=trim($resultat->token);
+        $_SESSION['email']=trim($resultat->email);
+        $_SESSION['etat']=trim($resultat->etat);
+        $_SESSION['sexe']=trim($resultat->sexe);
+        $_SESSION['password']=trim($resultat->password);
+        $_SESSION['description']=trim($resultat->description);
+
+        $_SESSION['notification']=true;
+        $_SESSION['notification_text']="Vous etes connectes au nom de ".$_SESSION['nom'];
+        $_SESSION['notification_status']="positive";
+      }else{
+        
+        $_SESSION['notification_text']=$concText=($resultat->sexe=="feminin")?" Cette utilisatrice a ete desactivee. Veillez contacter les administrateurs.":" Cette utilisateur a ete desactivee. Veillez contacter les administrateurs.";
+        $_SESSION['notification']=true;
+        $_SESSION['notification_status']="error";
+      }
+    }
+
+    if($tetsPres==0){
+      $_SESSION['notification_text']="Il semble que vous ne soyez pas inscrit. Veillez le faire gratuitement pour profiter de tous les services offerts par votre plateforme.";
+      $_SESSION['notification']=true;
+      $_SESSION['notification_status']="error";
+    }     
+  }
+
+
+  if(isset($_POST['emailI'])){
     $email=$_SESSION['email']=trim(utf8_encode($_POST['emailI']));
     $password=$_SESSION['password']=trim(utf8_encode($_POST['passwordI']));
     $nom=$_SESSION['nom']=trim(utf8_encode($_POST['nomI']));
@@ -22,24 +62,6 @@
       
           if(!empty($_POST['emailI']) and !empty($_POST['passwordI'])){
               
-      
-            if (isset($_FILES['image']) AND $_FILES['image']['error'] == 0) {
-                if ($_FILES['image']['size'] <= 20000000) {
-                    $infosfichier = pathinfo($_FILES['image']['name']);
-                    $infosfichier['extension']="jpg";
-                    $extension_image = $infosfichier['extension'];
-                    $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
-                    if (in_array($extension_image, $extensions_permises)){
-                        move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.$extension_image );
-                    }
-                }else{
-                    $_SESSION['notification']=true;
-                    $_SESSION['notification_text']="Il y a eu unee erreur qui a interrompu votre inscription.";
-                    $_SESSION['notification_status']="error";
-                    header("location: ../fr");
-                }
-            }
-      
             $requette=$bdd->query("select * from internaute where email like '$email'");
             while($resultat=$requette->fetch(PDO::FETCH_OBJ)){
                   $_SESSION['notification_status']="error";
@@ -59,26 +81,28 @@
 
             if($testT!=1){
               $date=date('o-m-d');
+              
+              if (isset($_FILES['image']) AND $_FILES['image']['error'] == 0) {
+                if ($_FILES['image']['size'] <= 20000000) {
+                    $infosfichier = pathinfo($_FILES['image']['name']);
+                    $infosfichier['extension']="jpg";
+                    $extension_image = $infosfichier['extension'];
+                    $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
+                    if (in_array($extension_image, $extensions_permises)){
+                        move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.'jpg' );
+                    }
+                }else{
+                    $_SESSION['notification']=true;
+                    $_SESSION['notification_text']="Il y a eu une erreur qui a interrompu votre inscription.";
+                    $_SESSION['notification_status']="error";
+                    header("location: ../fr");
+                }
+              }
+
               $requette=$bdd->query("INSERT INTO `internaute` (`idu`, `email`, `nom`, `prenom`, `password`, `sexe`, `token`, `etat`,`date`,description) VALUES (NULL, '$email','$nom','$prenom','$password','$sexe','$token', '1','$date','$description')");
       
-              $requette=$bdd->query("select * from internaute where email like '$email' and password  like '$password'");
-              while($resultat=$requette->fetch(PDO::FETCH_OBJ)){
-                  if($resultat->etat!=0){
-                    $_SESSION['id']=trim($resultat->idu);
-                    $_SESSION['nom']=trim($resultat->nom);
-                    $_SESSION['prenom']=trim($resultat->prenom);
-                    $_SESSION['token']=trim($resultat->token);
-                    $_SESSION['email']=trim($resultat->email);
-                    $_SESSION['etat']=trim($resultat->etat);
-                    $_SESSION['sexe']=trim($resultat->sexe);
-                    $_SESSION['description']=trim($resultat->description);
-                  }
-                      
-              }
+              connect($email,$password,$bdd);
               
-              $_SESSION['notification']=true;
-              $_SESSION['notification_text']="Vous etes connectes au nom de ".$_SESSION['nom'];
-              $_SESSION['notification_status']="positive";
               isset($_SESSION['submint_project'])?header("Location: ../fr/projet.php"):header("Location: ../fr/");
             }
           }else{
@@ -95,5 +119,30 @@
         header("location: ../fr/inscription.php");
       }
       
+    }
+  }else{
+      //Connexion
+    if (isset($_POST['emailC'],$_POST['passwordC'])){
+      if(!empty($_POST['emailC']) and !empty($_POST['passwordC'])){
+        $mail=trim($_POST['emailC']);
+        $password=trim($_POST['passwordC']);
+
+        connect($mail,$password,$bdd);
+        
+        //isset($_SESSION['submint_project'])?header("Location: ../fr/projet.php"):header("Location: ./");
+        header("Location: ../fr");
+      }
+    }else{
+    //deconnexion 
+
+      if(isset($_GET['out'])){
+        if($_GET['out']==true){
+          session_destroy();
+          session_unset();
+        }
+        header("Location: ../fr/index.php");
+      }
+    }
   }
+  
 ?>
