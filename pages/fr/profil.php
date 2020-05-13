@@ -2,7 +2,7 @@
 <html lang="fr" style="overflow-x:hidden">
 <head>
     
-    <?php $index="profil"; include("../../includes/header.php"); ?>
+    <?php $index="profil"; session_start(); include("../../includes/header.php"); ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
@@ -73,6 +73,7 @@
 
                 $show="jkewsrfresfgregesid";
                     if($userprop==true){
+                        isset($_SESSION['token'])?$token=$_SESSION['token']:'';
                 ?>
                 <div class="ui two item menu">
                     <a href="?<?php echo 'tokenized='.str_shuffle("erfwfkfewhfewafwegswefhbewgjhwageg24354geGFE4w2ga4aew54erg3gaerg5").'&ustreetyauijdnnn8isk='.$token.'&kind='.str_shuffle("erfg24354geGFE4w2ga4aew54erg3gaerg5") ?>&state=1" class="item <?php if(isset($_GET['state'])){if($_GET['state']==1){echo "active";} $show=1;}else{ echo "active";  $show=1;} ?> " >
@@ -188,9 +189,9 @@
                 <div class="ui divider invisible"></div>
                 <div class="ui divider invisible"></div>
                 <div class="ui grid">
-                    <div class="ui three wide column">
+                    <div class="ui six widecenter aligned column">
                         <?php $backg=(file_exists("../../img/imguser/".utf8_decode($token).".jpg"))?utf8_decode($token).".jpg":"default.png";?>
-                        <img src="../../img/imguser/<?php echo $backg ?>" class="ui small circular image"  style="border:2px solid orange;  width:150px;height:150px;margin-bottom:-7px;top:7px; padding:2px 2px;background:white/*url(../../img/imguser/<?php echo $backg ?>)*/; background-size:cover;background-position:top"/>
+                        <img src="../../img/imguser/<?php echo $backg ?>" class="ui small  image"  style="border:2px solid orange;  width:150px;height:150px;margin-bottom:-7px;top:7px; padding:2px 2px;background:white/*url(../../img/imguser/<?php echo $backg ?>)*/; background-size:cover;background-position:top;border-radius:50%"/>
                     </div>
                     <div class="ui ten wide column">
                         <div class="column">
@@ -353,8 +354,14 @@
             <?php
                     }else{
             ?>
-                  <h4 class="ui center aligned header"><span class="ui center aligned header teal" style="letter-spacing:0px;"><?php echo utf8_decode($prenom.' '.$nom); ?></span> n'a encore soumis aucun projet</h4>
+                  <h4 class="ui center aligned header "><span class="ui center aligned label header teal cfre" style="letter-spacing:0px;background:transparent!important;color:orange!important"><?php echo utf8_decode($prenom.' '.$nom); ?></span>n'a encore soumis aucun projet</h4>
                   </div>
+                    <style>
+                        span.cfre::first-letter{
+                          text-transform:capitalize!important;
+                        }
+
+                    </style>
             <?php
                     }
                 }

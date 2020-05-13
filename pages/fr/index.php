@@ -7,7 +7,9 @@
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
-          <?php include("../../includes/menu.php"); ?>
+          <?php
+          session_start();
+          include("../../includes/menu.php"); ?>
     <style type="text/css">
       body {
         background-color: #DADADA;
@@ -30,7 +32,10 @@
                 <div class="statistic">
                   <div class="value">
                     <i class="users icon"></i>
-                    3004
+                    <?php 
+                      $requete=$bdd->query('select count(*) as nbre from internaute');
+                      while ($res=$requete->fetch(PDO::FETCH_OBJ)) echo $res->nbre;
+                    ?>
                   </div>
                   <div class="label">
                     membres
@@ -44,7 +49,10 @@
                 <div class="statistic">
                   <div class="value">
                     <i class="credit card icon"></i>
-                    113
+                     <?php 
+                      $requete=$bdd->query('select count(*) as nbre from projet where etat=1');
+                      while ($res=$requete->fetch(PDO::FETCH_OBJ)) echo $res->nbre;
+                    ?>
                   </div>
                   <div class="label">
                     projets financés
@@ -384,9 +392,9 @@
               <div class="col-md-12 col-lg-12">Abodah Corporation est une entreprise offre aux désireux des solutions innovantes et performantes de géomatique. </div>
             </div>
             <div class="feature-block text-center col-md-6 col-lg-6 serv">
-              <i  class=" lnr-code  lnr img-fluid" style="font-size: xx-large;"></i>
-              <h4>Le génie logiciel</h4>
-              <div class="col-md-12 col-lg-12">Abodah Corporation est une entreprise dotée d'une section informatique performante prête à servir. </div>
+              <i  class=" lnr-flag  lnr img-fluid" style="font-size: xx-large;"></i>
+              <h4>Le service civique</h4>
+              <div class="col-md-12 col-lg-12">Dans un partenariat solide avec la DMJ, Abodah Corporation poursuit une ideologie civique. </div>
             </div>
           </div>
         </div>

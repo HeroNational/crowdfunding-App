@@ -3,7 +3,11 @@
 <head>
     <title>Abodah Funding</title>
     
-    <?php $index="contact"; include("../../includes/header.php"); ?>
+    <?php
+      $index="contact"; 
+      include("../../includes/header.php"); 
+      session_start();
+    ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">

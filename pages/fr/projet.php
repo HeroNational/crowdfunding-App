@@ -4,25 +4,30 @@
     <title>Soumettre un projet</title>
     
     <?php 
-      $index="entreprendre"; include("../../includes/header.php");
+      $index="projet"; include("../../includes/header.php");
       include("../../includes/connexionBd.php"); 
-      if(!isset($_SESSION['nom'])){
-        $_SESSION['submint_project']=true;
-        $_SESSION['notification']=true;
-        $_SESSION['notification_text']="Veillez vous connecter pour soumettre vos projets.";
-        $_SESSION['notification_status']="info";
-        header("location: inscription.php");
-      }else{
-        $_SESSION['submint_project']=true;
-        $_SESSION['notification']=true;
-        $_SESSION['notification_text']="Vous etes connectes en tant que ".$_SESSION['prenom']." ".$_SESSION['nom'];
-        $_SESSION['notification_status']="info";
-      }
+      
     ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
-          <?php include("../../includes/menu.php"); ?>
+          <?php
+          
+            session_start();
+            include("../../includes/menu.php"); 
+            if(!isset($_SESSION['nom'])){
+              $_SESSION['submint_project']=true;
+              $_SESSION['notification']=true;
+              $_SESSION['notification_text']="Veillez vous connecter pour soumettre vos projets.";
+              $_SESSION['notification_status']="info";
+              header("location: inscription.php");
+            }else{
+              $_SESSION['submint_project']=true;
+              $_SESSION['notification']=true;
+              $_SESSION['notification_text']="Vous etes connectes en tant que ".$_SESSION['prenom']." ".$_SESSION['nom'];
+              $_SESSION['notification_status']="info";
+            }
+          ?>
  
     <style type="text/css">
       body {

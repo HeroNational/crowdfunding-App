@@ -3,7 +3,11 @@
 <head>
     <title>Toutes les campagnes</title>
     
-    <?php $index="financer"; include("../../includes/header.php"); ?>
+    <?php 
+      $index="financer"; 
+      include("../../includes/header.php"); 
+      session_start();
+    ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">

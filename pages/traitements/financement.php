@@ -13,7 +13,7 @@
             $value=array("status"=>$api->status,"message"=>$api->message);
         }
     }else{
-        $value=array("status"=>"failed","message"=>"FAil to call the Payment API.");
+        $value=array("status"=>"failed","message"=>"Fail to call the Payment API.");
     }
 
     header("content-type: application/json");

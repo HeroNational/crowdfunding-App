@@ -1,5 +1,6 @@
 <?php
     include("../../includes/connexionBd.php");
+    session_start();
     $image=mt_rand(1,10000001221);
     $nom=$_POST['nom'];
     $objectif=$_POST['objectif'];
@@ -7,7 +8,7 @@
     $description=$_POST['description'];
     $duree=$_POST['duree'];
     $slogan=$_POST['slogan'];
-    $date=date("o-d-m");
+    $date=date("o-m-d");
     
     if (isset($_FILES['image']) AND $_FILES['image']['error'] == 0) {
       if ($_FILES['image']['size'] <= 20000000) {
@@ -35,7 +36,7 @@
         $_SESSION['notification']=true;
         $_SESSION['notification_text']="Veillez vous connecter pour soumettre vos projets.";
         $_SESSION['notification_status']="info";
-        header("location: ../inscription");
+        header("location: ../inscription.php");
       }else{
         $id=$_SESSION['id'];
       }

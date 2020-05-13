@@ -1,6 +1,5 @@
 <?php
   include_once("connexionBd.php");
-  session_start();
 ?>
 
 

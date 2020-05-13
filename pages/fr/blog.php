@@ -3,7 +3,12 @@
 <head>
     <title>blog</title>
     
-    <?php $index="blog"; include("../../includes/connexionBd.php"); include("../../includes/header.php"); ?>
+    <?php 
+        $index="blog"; 
+        include("../../includes/connexionBd.php"); 
+        include("../../includes/header.php"); 
+        session_start();
+    ?>
     <section id="helm" >
 
         <div class="helm-container">

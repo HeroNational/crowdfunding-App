@@ -3,12 +3,16 @@
 <head>
     <title>Finance d'un projet</title>
     
-    <?php $index="projet"; include("../../includes/header.php"); ?>
+    <?php 
+      $index="projet"; 
+      session_start(); 
+      include("../../includes/header.php"); 
+    ?>
     
     <section id="helm" class="wow fadeIn">
 
-        <div class="helm-container">
-          <?php include("../../includes/menu.php"); ?>
+    <div class="helm-container">
+    <?php include("../../includes/menu.php"); ?>
     <style type="text/css">
       body {
         background-color: #DADADA;
@@ -30,7 +34,6 @@
     <h1 class="ui header blue center aligned segment"><?php echo utf8_decode($resultat->nomProjet);?></h1>
     <div style="padding:9px">
       <div class="hidden divider horizontal"></div>
-
       <div class="ui stackable grid center aligned">
         <div class="ui six wide column">
         
@@ -89,7 +92,13 @@
           <?php
             }else{
           ?>
-            <div class="ui message red">Campagne terminee.</div>
+            <script>
+              swal("Oups...!","\nCe projet est en fin de campagne.\n\n","warning");
+            </script>
+            <div class="ui message red">Ce projet est en fin de campagne. 
+              <br><br>
+              <a href="campagne.php" class="ui label teal">Consultez plus de campagnes</a>
+            </div>
           <?php
             }
           ?>
@@ -99,7 +108,9 @@
           <div class="ui grid">
             <div class="ui row">
               <div class="ui sixteen wide column" style="text-align: justify;">
-                <img src="../../img/imgprojet/<?php echo file_exists('../../img/imgprojet/'.$resultat->image.'.jpg')?utf8_decode($resultat->image).'.jpg':'default.jpg';?>" alt="" class="ui rounded image">
+                <a target="_blank" href="../../img/imgprojet/<?php echo file_exists('../../img/imgprojet/'.$resultat->image.'.jpg')?utf8_decode($resultat->image).'.jpg':'default.jpg';?>" alt="" class="ui rounded image">
+                  <img alt="<?php echo $resultat->description ?>" src="../../img/imgprojet/<?php echo file_exists('../../img/imgprojet/'.$resultat->image.'.jpg')?utf8_decode($resultat->image).'.jpg':'default.jpg';?>" alt="" class="ui rounded image">
+                </a>
               </div>
               <div class="ui sixteen wide column" ><br>
                 <h1><u>Description</u></h1>
@@ -128,7 +139,12 @@
                           <img src="../../img/imguser/<?php echo file_exists('../../img/imguser/'.$resultats->token.'.jpg')?utf8_decode($resultats->token).'.jpg':'default.png';?>" class="ui circular avatar image" alt="<?php echo nl2br(utf8_decode($resultats->prenom." ".$resultats->nom))?>" srcset="" style="border:1px solid teal ;">
                         </center>
                       </div>
-                      <div class="label">
+                      <div class="label cfr">
+                      <style>
+                        .cfr::first-letter{
+                          text-transform:capitalize;
+                        }
+                      </style>
                         <?php echo nl2br(utf8_decode($resultats->prenom." ".$resultats->nom))?>
                       </div>
                     </div>
@@ -149,7 +165,7 @@
           <center>
             <div class="ui card">
               <div class="image dimmable dimmed">
-                <img src="../../img/imguser/<?php echo file_exists('../../img/imguser/'.$resultat->token.'.jpg')?utf8_decode($resultat->token).'.jpg':'default.png';?>">
+                <img alt="<?php echo $resultat->description ?>" src="../../img/imguser/<?php echo file_exists('../../img/imguser/'.$resultat->token.'.jpg')?utf8_decode($resultat->token).'.jpg':'default.png';?>">
               </div>
               <div class="content">
                 <div class="header" style="display:inline-flex;">
