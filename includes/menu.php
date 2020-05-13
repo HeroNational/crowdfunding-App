@@ -21,7 +21,7 @@
                     <li><a href="campagne.php">Toutes les campagnes</a></li>
                   </ul>
               </li>
-              <li class="menu-has-children <?php if($index=="entreprendre") echo "menu-active"; ?>"><a href="#"><span class="lnr lnr-briefcase"></span class="lnr lnr-briefcase">&nbsp;&nbsp;Entreprendre</a>
+              <li class="menu-has-children <?php if($index=="projet") echo "menu-active"; ?>"><a href="#"><span class="lnr lnr-briefcase"></span class="lnr lnr-briefcase">&nbsp;&nbsp;Entreprendre</a>
                   <ul>
                     <li><a href="entreprise.php">Guide entreprise</a></li>
                     <li><a href="projet.php">Soumettre un projet</a></li>
