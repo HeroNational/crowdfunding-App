@@ -3,12 +3,15 @@
 <head>
     <title>Abodah Funding</title>
     <?php ?>
-    <?php  $index="index";include("../../includes/header.php"); ?>
+    <?php  
+      session_start();
+      $index="index";
+      include("../../includes/header.php");
+    ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
           <?php
-          session_start();
           include("../../includes/menu.php"); ?>
     <style type="text/css">
       body {
@@ -76,13 +79,55 @@
             </div>
           </div>
     </section>
+
+    <br>
+    <hr>
+    <div class="ui container text-center">
+      <br>
+        <div class="card" style="background-color:light-red; border-color:red;">
+          <div class="card-body">
+             <h4 class="card-title">La COVID-19 est est une realite.</h4>
+            <p class="card-text">
+              <?php
+                include("../../includes/localcovid.php");
+                if(isset($_SESSION['infocovid']['covid'])){
+                  if($_SESSION['infocovid']['covid']==true){
+                    $datecovid=explode(' ',$_SESSION['infocovid']['covid']['date']);
+              ?>
+                    <h2>Les statistiques pour le  <span class="ui header small orange"><?php echo $_SESSION['infocovid']['covid']['pays'].' le '.formatsimpledate($datecovid[0], 'fr', ' '); ?></span></h2>
+                    Nombre de cas confirmes: <span class="ui header red"><?php echo $_SESSION['infocovid']['covid']['confirmed']; ?></span><br>
+                    Nombre de cas actifs: <span class="ui header red"><?php echo $_SESSION['infocovid']['covid']['active']; ?></span><br>
+                    Nombre de cas guerisons: <span class="ui header green"><?php echo $_SESSION['infocovid']['covid']['recovered']; ?></span><br>
+                    Nombre de morts de COVID-19: <span class="ui header red"><?php echo $_SESSION['infocovid']['covid']['deaths']; ?></span><br><br>
+              <?php 
+                  }
+                }
+              ?>
+              <div class="ui positive message">
+                Respectons les mesures barrieres gouvernementales
+              </div>. <br><br>
+
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/coronavirus_wear_a_mask_icon_141048.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/remove_behind_coronavirus_measures_mask_icon_133605.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/closed_bin_mask_coronavirus_measures_icon_133590.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/coronavirus_dont_touch_eyes_and_nose_icon_141054.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/covid_corona_hygiene_health_protect_soap_coronavirus_icon_140798.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/covid_corona_hygiene_health_protect_clean_hand_coronavirus_icon_140801.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/self_protection_hand_wash_cleaning_healthcare_hygiene_medical_covid_coronavirus_icon_140736.png" alt="">
+            <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/spreading_keep_distance_coronavirus_virus_pandemia_icon_134810.png" alt="">
+           
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+<br><br>
     <section  id="features" class=" container text-center wow fadeInUp">
         <div class="container">
           <div class="section-title text-center">
             <h2>Quelques campagnes</h2>
           </div>
         </div>
-    
       <div 
           style="padding:0px 10px;
                   margin-Top:100px"

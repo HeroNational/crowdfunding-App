@@ -1,12 +1,12 @@
 <?php 
   require("connexionBdApi.php");
-
-  $application=$_GET['token'];
+  $num='';
+  $application=isset($_GET['token'])?$_GET['token']:'';
   if(isset($_GET['number']) and isset($_GET['somme'])){
     if(!empty($_GET['number'])){
 
-      $num=$_GET['number'];
-      $som=$_GET['somme'];
+      $num=isset($_GET['number'])?$_GET['number']:'';
+      $som=isset($_GET['somme'])?$_GET['somme']:'';
 
       if($som>0){
 
@@ -90,6 +90,7 @@
     <style type="text/css">
       body {
         background-color: rgba(218, 218, 218, 0.445);
+        padding-top:70px;
       }
       body > .grid {
         height: 100%;

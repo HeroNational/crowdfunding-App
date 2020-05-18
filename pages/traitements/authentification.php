@@ -11,14 +11,14 @@
     $tetsPres=0;
     while($resultat=$requette->fetch(PDO::FETCH_OBJ)){
       $tetsPres=1;
-      if($resultat->etat!=0){
+      if($resultat->etatU==1){
         $_SESSION['id']=$resultat->idu;
         $_SESSION['id']=trim($resultat->idu);
         $_SESSION['nom']=trim($resultat->nom);
         $_SESSION['prenom']=trim($resultat->prenom);
         $_SESSION['token']=trim($resultat->token);
         $_SESSION['email']=trim($resultat->email);
-        $_SESSION['etat']=trim($resultat->etat);
+        $_SESSION['etat']=trim($resultat->etatU);
         $_SESSION['sexe']=trim($resultat->sexe);
         $_SESSION['password']=trim($resultat->password);
         $_SESSION['description']=trim($resultat->description);
@@ -28,7 +28,7 @@
         $_SESSION['notification_status']="positive";
       }else{
         
-        $_SESSION['notification_text']=$concText=($resultat->sexe=="feminin")?" Cette utilisatrice a ete desactivee. Veillez contacter les administrateurs.":" Cette utilisateur a ete desactivee. Veillez contacter les administrateurs.";
+        $_SESSION['notification_text']=$concText=($resultat->sexe=="feminin")?" Cette utilisatrice a ete desactivee. Veillez contacter les administrateurs.":" Cet utilisateur a ete desactivee. Veillez contacter les administrateurs.";
         $_SESSION['notification']=true;
         $_SESSION['notification_status']="error";
       }
@@ -67,7 +67,7 @@
                   $_SESSION['notification_status']="error";
                   $_SESSION['notification']=true;
                   $testT=1;
-              if($resultat->etat!=1){
+              if($resultat->etatU!=1){
                   
                   $concText=($resultat->sexe=="feminin")?" Cette utilisatrice ":" Cet utilisateur";
                   $_SESSION['notification_text']="Il existe deja ".$concText;

@@ -71,7 +71,8 @@
     <script src="../../js/swal/swalmin.js"></script>
 
 </head>
-<?php 
+<?php
+
 
     function formatsimpledate($string, $language,$seprator){
       $stringEx=explode('-',$string);
@@ -88,16 +89,14 @@
     function financer($number,$token,$montant){
       $url="http://localhost/serve/Crowdfunding/api/api_rest.php?number=$number&token=$token&somme=$montant";
       $api = @json_decode(file_get_contents($url));
-      if($api){
           $value=array();
-          if($api->status=="success"){
-              $value=array("status"=>$api->status,"nom"=>$api->nom);
-          }else{
-              $value=array("status"=>$api->status,"message"=>$api->message);
+          if(isset($api->status)){
+            if($api->status=="success"){
+                $value=array("status"=>$api->status,"nom"=>$api->nom);
+            }else{
+                $value=array("status"=>$api->status,"message"=>$api->message);
+            }
           }
-      }else{
-          $value=array("status"=>"failed","message"=>"FAil to call the Payment API.");
-      }
       return $value;
     }
     require_once("notification_financement.php");
@@ -112,7 +111,7 @@
       }
     }
 
-  ?>
+    ?>
 <body oncontextmenu="contextmenu();return false;" id="gbody" onload="load()">
 
     <div class="loader forLoad" id="loaderPri">
