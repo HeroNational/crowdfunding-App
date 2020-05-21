@@ -4,7 +4,7 @@
     <title>Finance d'un projet</title>
     
     <?php 
-      $index="projet"; 
+      $index="financer"; 
       session_start(); 
       include("../../includes/header.php"); 
     ?>
