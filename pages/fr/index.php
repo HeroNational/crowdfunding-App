@@ -133,7 +133,12 @@
                   margin-Top:100px"
               class="ui center aligned stackable grid"
       >
-          <?php 
+          <?php
+            $conditionA=array("p.idpro","p.etat","p.nomProjet","p.objectif","p.slogan"); 
+            $ordreA=array("DESC","ASC");
+            $ioA=mt_rand(0,1);
+            $icA=mt_rand(0,7);
+            $conditionA=$conditionA[$icA]." ".$ordreA[$ioA];
             $hover=array(
               1=>"imghvr-fade",
               2=>"imghvr-push-up",
@@ -177,7 +182,7 @@
               40=>"imghvr-blur"
             );
             $dateN=date("y-m-d");
-            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' and p.duree>='$dateN' group by idpro order by p.idpro DESC  limit 3";
+            $requete="SELECT * FROM projet as p,financement as f where  f.projet=p.idpro and p.etat='1' and p.duree>='$dateN' group by idpro order by $conditionA  limit 3";
             $execution=$bdd->query($requete);
               while($resultset=$execution->fetch(PDO::FETCH_OBJ)){
                 $posHover=mt_rand(1,39);
@@ -195,7 +200,7 @@
                       <figcaption>
                           <h3><?php echo '<u>'.$resultset->nomProjet.'</u>'?></h3>
                           <p style="color:white">
-                            <?php echo utf8_decode($resultset->descriptionProjet); ?>
+                            <?php echo utf8_decode($resultset->slogan); ?>
                           </p>
                       </figcaption>
                   </figure>

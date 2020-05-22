@@ -18,7 +18,7 @@
                 $idA=$res['id'];
             }
             $stmt->Closecursor();
-             $sql="SELECT phone,solde,nom,id FROM utilisateur u, compte c WHERE u.phone=c.id and u.nom LIKE '$application'";
+            $sql="SELECT phone,solde,nom FROM utilisateur u, compte c WHERE u.phone=c.id and u.phone LIKE '$num'";
             $stmt=$api->query($sql);
             $exist=false;
             while($res=$stmt->fetch()){
@@ -29,7 +29,6 @@
             }
             
             //Action de financement
-
             if($existA and $exist){
                 $som1=$esxSom-$som;
                 if($som1<=0){
@@ -53,9 +52,12 @@
             }else{
                 if($exist){
                     $value=array("status"=>"failed","message"=>"Not logged","phone"=>"","nom"=>"","solde"=>"");
-                }
-                if($existA){
-                    $value=array("status"=>"failed","message"=>"Unknown application","phone"=>"","nom"=>"","solde"=>"");
+                }else{
+                    if($existA){
+                        $value=array("status"=>"failed","message"=>"Unknown application","phone"=>"","nom"=>"","solde"=>"");
+                    }else{
+                        $value=array("status"=>"failed","message"=>"Unknown application and not logged user","phone"=>"","nom"=>"","solde"=>"");
+                    }
                 }
             }
         }

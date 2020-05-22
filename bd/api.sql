@@ -1,52 +1,92 @@
-/*
-SQLyog Ultimate v11.11 (64 bit)
-MySQL - 5.5.5-10.1.13-MariaDB : Database - api
-*********************************************************************
-*/
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Client :  127.0.0.1
+-- Généré le :  Ven 22 Mai 2020 à 01:26
+-- Version du serveur :  10.1.13-MariaDB
+-- Version de PHP :  5.6.21
 
-/*!40101 SET NAMES utf8 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
-/*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`api` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_croatian_mysql561_ci */;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-USE `api`;
+--
+-- Base de données :  `api`
+--
 
-/*Table structure for table `compte` */
+-- --------------------------------------------------------
 
-DROP TABLE IF EXISTS `compte`;
+--
+-- Structure de la table `compte`
+--
 
 CREATE TABLE `compte` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `solde` decimal(10,0) NOT NULL,
-  `utilisateur` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `utilisateur` (`utilisateur`),
-  CONSTRAINT `compte_ibfk_1` FOREIGN KEY (`utilisateur`) REFERENCES `utilisateurs` (`idU`)
+  `id` varchar(35) COLLATE utf8_croatian_mysql561_ci NOT NULL,
+  `token` text COLLATE utf8_croatian_mysql561_ci NOT NULL,
+  `solde` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_mysql561_ci;
 
-/*Data for the table `compte` */
+--
+-- Contenu de la table `compte`
+--
 
-/*Table structure for table `utilisateurs` */
+INSERT INTO `compte` (`id`, `token`, `solde`) VALUES
+('237657675216', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44El', 7999588),
+('675120936', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44E', 6000409),
+('677881982', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44Ert4', 1);
 
-DROP TABLE IF EXISTS `utilisateurs`;
+-- --------------------------------------------------------
 
-CREATE TABLE `utilisateurs` (
-  `idU` int(11) NOT NULL AUTO_INCREMENT,
+--
+-- Structure de la table `utilisateur`
+--
+
+CREATE TABLE `utilisateur` (
   `nom` varchar(250) COLLATE utf8_croatian_mysql561_ci NOT NULL,
-  `telephone` varchar(250) COLLATE utf8_croatian_mysql561_ci DEFAULT NULL,
-  PRIMARY KEY (`idU`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_mysql561_ci;
+  `phone` varchar(35) COLLATE utf8_croatian_mysql561_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_mysql561_ci;
 
-/*Data for the table `utilisateurs` */
+--
+-- Contenu de la table `utilisateur`
+--
 
-insert  into `utilisateurs`(`idU`,`nom`,`telephone`) values (1,'8uuikigkuik','2020-03-18 14:06:58');
+INSERT INTO `utilisateur` (`nom`, `phone`) VALUES
+('Daniel Fokou', '237657675216'),
+('iwerwefojwdfvwaefiufdvsdfgsergweagfgfrnherg5454y5f45y54ttg54y54erw45ye4tg5yvgy5serergresag34t3445tt5454erst5ty5rtgrtg54g63rtg4rg56erg56hgytet4h5rthy6rthrtgb65rth', '675120936'),
+('Mbarga', '677881982');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `compte`
+--
+ALTER TABLE `compte`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`phone`);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `compte`
+--
+ALTER TABLE `compte`
+  ADD CONSTRAINT `compte_ibfk_1` FOREIGN KEY (`id`) REFERENCES `utilisateur` (`phone`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

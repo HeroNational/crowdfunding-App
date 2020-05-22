@@ -8,7 +8,8 @@
       <div class="container menu-container">
           <span id="logo" class="pull-left" style="position: absolute; left:25px; top:-10px;">
               <h1>
-                  Abodah Funding
+                  <span style="color:darkorange!important">Abodah</span>
+                  <span style="color:#5bbd72!important">Funding</span>
               </h1>
           </span>
 

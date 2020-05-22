@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="fr" style="overflow-x:hidden">
 <head>
-    <title>Finance d'un projet</title>
-    
-    <?php 
+
+<?php 
+  
       $index="financer"; 
       session_start(); 
       include("../../includes/header.php"); 
-    ?>
-    
+      !isset($_GET['prodhgdthtrhydtrtrjutydrhrthwee'])?header("location: campagne.php"):'';
+      empty($_GET['prodhgdthtrhydtrtrjutydrhrthwee'])?header("location: campagne.php"):'';
+      $idProjet=$_GET['prodhgdthtrhydtrtrjutydrhrthwee'];
+      $executions=$bdd->query("SELECT * FROM projet p,financement f, internaute i WHERE f.projet=p.idpro and i.idU=p.internaute and p.idpro='$idProjet' GROUP BY idpro");
+      while($resultate=$executions->fetch(PDO::FETCH_OBJ)){
+        echo "<title>".$resultate->nomProjet."</title>";
+        $vue=$resultate->vue;
+      }
+      $vue=$vue+1;
+      if(isset($_SESSION['projet'])){
+        $_SESSION['projet']!=$idProjet?$bdd->query("UPDATE projet SET vue='$vue' WHERE idpro='$idProjet'"):'';
+      }
+      $_SESSION['projet']=$idProjet;
+
+?>
     <section id="helm" class="wow fadeIn">
 
     <div class="helm-container">
@@ -25,10 +38,7 @@
       }
     </style>
     <?php
-      !isset($_GET['prodhgdthtrhydtrtrjutydrhrthwee'])?header("location: campagne.php"):'';
-      empty($_GET['prodhgdthtrhydtrtrjutydrhrthwee'])?header("location: campagne.php"):'';
-      $idProjet=$_GET['prodhgdthtrhydtrtrjutydrhrthwee'];
-      $execution=$bdd->query("SELECT * FROM projet p,financement f, internaute i WHERE f.projet=p.idpro and i.idU=p.internaute and p.idpro='$idProjet' GROUP BY idpro");
+      $execution=$bdd->query("SELECT * FROM projet p,financement f,categorie c, internaute i WHERE f.projet=p.idpro and c.idcat=p.categorieProjet and i.idU=p.internaute and p.idpro='$idProjet' GROUP BY idpro");
       while($resultat=$execution->fetch(PDO::FETCH_OBJ)){
     ?>
     <h1 class="ui header blue center aligned segment"><?php echo utf8_decode($resultat->nomProjet);?></h1>
@@ -119,9 +129,16 @@
                 <?php echo nl2br(utf8_decode($resultat->descriptionProjet));?>
               </div>
             </div>
+
             <div class="ui row">
               <div class="ui column" style="display:inline-flex">
                 <h1>Date de fin de la campagne </h1>: <span class="ui meta"> <?php echo '&nbsp;&nbsp;'.nl2br(utf8_decode(utf8_decode(formatsimpledate($resultat->duree,"fr"," "))));?></span>
+              </div>
+            </div>
+
+            <div class="ui row">
+              <div class="ui column" style="display:inline-flex">
+                <h1>Categorie </h1>: <span class="ui meta"> <?php echo '&nbsp;&nbsp;'.$resultat->categorie?></span>
               </div>
             </div>
             <div class="ui row">

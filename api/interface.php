@@ -1,6 +1,7 @@
 <?php 
   require("connexionBdApi.php");
   $num='';
+  !isset($_GET['token'])?header("Location: ?number=237657675216&token=iwerwefojwdfvwaefiufdvsdfgsergweagfgfrnherg5454y5f45y54ttg54y54erw45ye4tg5yvgy5serergresag34t3445tt5454erst5ty5rtgrtg54g63rtg4rg56erg56hgytet4h5rthy6rthrtgb65rth&somme=0"):'';
   $application=isset($_GET['token'])?$_GET['token']:'';
   if(isset($_GET['number']) and isset($_GET['somme'])){
     if(!empty($_GET['number'])){
