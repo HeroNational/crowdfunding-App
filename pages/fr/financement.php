@@ -80,7 +80,7 @@
                     <label for="" style="float:left">Adresse email</label>
                     <div class="ui left icon input">
                       <i class="mail icon"></i>
-                      <input type="email" id='montant' name="email" placeholder="Adresse email">
+                      <input type="email" required id='montant' name="email" value="<?php echo isset($_SESSION['mail'])?$_SESSION['mail']:'54'?>" placeholder="Adresse email">
                     </div>
                   </div>
                 <?php } ?>
@@ -118,9 +118,62 @@
           <div class="ui grid">
             <div class="ui row">
               <div class="ui sixteen wide column" style="text-align: justify;">
-                <a target="_blank" href="../../img/imgprojet/<?php echo file_exists('../../img/imgprojet/'.$resultat->image.'.jpg')?utf8_decode($resultat->image).'.jpg':'default.jpg';?>" alt="" class="ui rounded image">
+              <span>
+                  <a target="_blank" href="../../img/imgprojet/<?php echo file_exists('../../img/imgprojet/'.$resultat->image.'.jpg')?utf8_decode($resultat->image).'.jpg':'default.jpg';?>" alt="" class="ui rounded image">
                   <img alt="<?php echo $resultat->description ?>" src="../../img/imgprojet/<?php echo file_exists('../../img/imgprojet/'.$resultat->image.'.jpg')?utf8_decode($resultat->image).'.jpg':'default.jpg';?>" alt="" class="ui rounded image">
                 </a>
+                <?php 
+                    $requeteS="SELECT sum(montant) as acquis FROM financement where projet='$resultat->idpro'";
+                    $executionS=$bdd->query($requeteS);
+                    $resultsetS=$executionS->fetch(PDO::FETCH_OBJ);
+                    $sommeacquise=$resultsetS->acquis;
+                    $executionS->closecursor();
+                    $diff=date_diff(date_create(date("y-m-d")),date_create(utf8_decode($resultat->duree)));
+                ?>
+                    
+                </span>
+                <br>
+                <?php 
+                  $sommetotale=$resultat->objectif;
+                  $per=($sommeacquise*100)/$sommetotale;
+                  $sommetotale=number_format($sommetotale, 0,'.',' ');
+                  $per=number_format($per, 0,'.', '');
+                  
+                ?>
+              <br>
+                <div class="">
+                  <span style="color:#ec4e43">
+                        <?php 
+                          echo $diff->format("%a"); 
+                        ?>
+                          
+                    </span>
+                    Jours restants&nbsp;&nbsp;&nbsp;
+                  <?php echo number_format($sommeacquise,0,"."," ").' XAF ('.$per."%) sur <b>".$sommetotale."</b> XAF"; ?></div>
+                    <span class="ui extra">
+                        <span class="ui purple progress active" style="height:13px!important">
+                            <span class="bar" style="width:
+                                  <?php echo ($per=($per<=100)?$per:"100");?>%;background:<?php
+                                      if($per<16.66){
+                                          $theming="217, 92, 92";
+                                      }elseif($per>16.65 and $per <33.33){
+                                          $theming="217, 166, 92";
+                                      }elseif($per>33.32 and $per<49.99){
+                                        $theming="230, 187, 72";
+                                      }elseif($per>49.98 and $per<66.66){
+                                        $theming="221, 201, 40";
+                                      }elseif($per>66.65 and $per<83.33){
+                                        $theming="180, 217, 92";
+                                      }elseif($per>83.32 and $per<95.33){
+                                          $theming="91, 189, 114, 0.671";
+                                      }else{
+                                        $theming="91, 189, 114";
+                                      }
+                                      echo "rgba(".$theming.")";
+                                  ?>!important;  height:6px">
+                                <span class="progress"></span>
+                            </span>
+                        </span>
               </div>
               <div class="ui sixteen wide column" ><br>
                 <h1><u>Description</u></h1>

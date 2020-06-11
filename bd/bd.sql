@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 22 Mai 2020 à 01:26
+-- Généré le :  Ven 22 Mai 2020 à 22:53
 -- Version du serveur :  10.1.13-MariaDB
 -- Version de PHP :  5.6.21
 
@@ -50,8 +50,16 @@ CREATE TABLE `anonyme` (
   `idprojet` int(11) DEFAULT NULL,
   `montant` int(11) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `dte` varchar(255) DEFAULT NULL
+  `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `anonyme`
+--
+
+INSERT INTO `anonyme` (`id`, `idprojet`, `montant`, `email`, `date`) VALUES
+(1, 9, 100, 'wootarkovski25032019@gmail.com', '2020-05-22'),
+(2, 9, 100, 'wootarkovski25032019@gmail.com', '2020-05-22');
 
 -- --------------------------------------------------------
 
@@ -135,7 +143,8 @@ INSERT INTO `financement` (`idFin`, `internaute`, `projet`, `montant`, `date`) V
 (22, 15, 22, 12365, '2020-05-14'),
 (23, 15, 22, 12, '2020-05-21'),
 (24, 15, 10, 1000000, '2020-05-21'),
-(25, 15, 10, 1000000, '2020-05-21');
+(25, 15, 10, 1000000, '2020-05-21'),
+(26, 1, 23, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -172,8 +181,9 @@ INSERT INTO `internaute` (`idu`, `email`, `nom`, `prenom`, `password`, `descript
 (11, 'sdgergr@hjf.eyu', 'rtytr', 'rthrth', 'drtytr', '', 'feminin', '2019-02-05', 'WdfeA8SdSjgsh4JtUht75iryfrhdgzsQtguarrK0ksdXk4gu8Srrsht4A04Perssz59', 1),
 (12, 'sdgergr@hjf.etdf', 'wefwef', 'ewfdwe', 'efwefdwf', '', '', '2019-02-05', '9f0hswUe8e5fdreXjAi87JeSAs5zddWSKkeg4kssgPf4QSh40uzwdw4wfsauf', 1),
 (14, 'mervie@gmail.com', 'Mahout', 'Mervie', 'mervie', '', 'feminin', '2019-02-05', '0dh4zdeaik8eshs4sUKuruffPWgoSzM9ik4Ase4S8gjXAMu5drJs0hSv7Qat5', 1),
-(15, 'daniel@gmail.com', 'Fokou', 'Daniel', 'daniel', '', 'masculin', '2019-02-05', 'QWiu4A4eler8Aoho7zSjf5sJS4gP0Fs0ikn5auaddls4DndfeS9hiUasugk8zdksXK', 1),
-(21, 'yal@gmail.come', 'Barrtt', 'Baro', 'yal', 'rthgrth', 'masculin', '2020-04-25', 'da4tUssK5dhySgsarA84AruPlosaeSWrJz05uBkf4zSjs8Bg0d4fi9aQXhr7tk', 1);
+(15, 'daniel@gmail.com', 'Fokou', 'Daniel', 'daniel', '', 'masculin', '2019-02-05', 'd5lJ9uQaisKS4f0hgUngSzh4isDuarkk0PAdkszAn4sueifFeoXSjl5sea4o87dWd8', 1),
+(21, 'yal@gmail.come', 'Barrtt', 'Baro', 'yal', 'rthgrth', 'masculin', '2020-04-25', 'da4tUssK5dhySgsarA84AruPlosaeSWrJz05uBkf4zSjs8Bg0d4fi9aQXhr7tk', 1),
+(22, 'querty@gmail.com', 'Baro', 'Bar', 'qwerty', 'retergsregsegffd', 'feminin', '2020-05-22', '8Q4B0SgABso8sd94sk5XuhzsddSfk5KW4jrhgaaaeAuPirJr07z4fUSs', 1);
 
 -- --------------------------------------------------------
 
@@ -275,7 +285,8 @@ INSERT INTO `projet` (`idpro`, `nomProjet`, `image`, `descriptionProjet`, `sloga
 (13, 'WaterGate', '1275103200', 'fdghfdxgdrhrgzergresgesesrdf wwefrwefe4t4trds', 'De l''eau, une vie!', 19000000, '2020-18-03', '2022-05-12', 1, NULL, 15, 2, NULL),
 (19, 'ergsreg', '1352999098', ' regesge', 'rdtgrgt', 3434, '2020-18-03', '2020-03-26', 1, NULL, 15, 2, NULL),
 (21, 'rtrthrthrthrtdhrtdhrthrthrt4hrt', 'default', ' ergergergreregerg', 'rthrthrt', 12220202, '2020-25-04', '2020-04-30', 1, NULL, 21, 2, NULL),
-(22, 'Mega Soft', '1174239930', 'Application de reseautage social mettant en relation des personnes de tout age pour des projets communautaires et professionnels.\r\n\r\nLa joie de nous voir reussir des entreprises est partagee. \r\n\r\n\r\n    Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis fugiat magni veritatis voluptatum fuga ipsum quidem facere, adipisci consectetur accusamus ducimus commodi possimus deserunt perspiciatis quam labore error quo asperiores.\r\n    Tempora, quis accusamus consequuntur maiores molestiae consectetur. Eius quam pariatur animi perferendis! Quam excepturi quia est sequi, molestias iste provident adipisci, nulla, repudiandae tempore vitae rerum aspernatur asperiores harum necessitatibus.\r\n    Eligendi quae aperiam pariatur natus voluptate aspernatur perspiciatis, aut commodi repudiandae libero ullam illum dolores sit adipisci architecto. Numquam magnam possimus eaque corrupti quia voluptatibus omnis obcaecati aperiam cupiditate illo?\r\n    Unde praesentium dolor corrupti fuga quas, qui optio excepturi odio. Ex sit itaque facere. Debitis at pariatur magni quod similique! Eveniet dignissimos, eos ratione ex illum quidem itaque et? Ab!\r\n    Rem laboriosam, porro quos, repudiandae voluptatem nobis quidem, atque optio voluptate eos ad corporis pariatur ipsa architecto. In ab quia voluptatem laboriosam soluta molestiae, quos dolorem quod rerum eum dicta!\r\n    Doloremque laboriosam repudiandae, quia veritatis quae dignissimos accusantium temporibus illo cupiditate laudantium porro beatae itaque, quos maxime repellat facere quis dolor rerum. Libero repellat, delectus nesciunt natus tempora animi quod?\r\n    Quod consequatur ducimus a nulla facere eveniet exercitationem est labore nobis aut aliquam et debitis natus autem eligendi quidem accusantium cum consectetur, hic dicta saepe repudiandae similique architecto? Dolorem, reprehenderit.\r\n    Amet, praesentium sunt! Obcaecati repellendus eligendi ab quia et! Excepturi quos ullam enim incidunt? Aut deserunt, inventore tenetur cumque itaque ab aperiam dignissimos cupiditate, dolor, sapiente eius! Cumque, repellendus sit?\r\n    Aperiam, praesentium temporibus blanditiis pariatur in nam, autem quam cumque sequi natus harum modi alias debitis, fugiat provident dicta culpa! Voluptatem maiores quisquam, corrupti eos asperiores earum ea dignissimos fugit!\r\n    Porro aspernatur asperiores ducimus, maxime ipsam sapiente sunt laborum molestias iusto quia quaerat eos labore voluptas autem commodi perspiciatis nostrum odio? Earum obcaecati, officia quod modi illo hic cupiditate eum!\r\n    Ut nisi perferendis unde dolorum. Pariatur itaque, fugit eaque iure tempora et voluptatum debitis porro rem sequi similique, obcaecati mollitia ea recusandae dolor cupiditate distinctio assumenda dolorem nisi saepe repudiandae!\r\n    Id dicta, aspernatur magni fugit ipsa ratione odit! Asperiores similique ea natus necessitatibus minima aut possimus? Quos magnam molestiae suscipit rem praesentium, accusantium dolorem natus, optio modi nesciunt alias nihil.\r\n    Numquam nulla vel aliquam corporis dolorum architecto iure harum unde dolore, quisquam atque ex iusto consectetur nisi necessitatibus debitis explicabo, deserunt optio ipsum ab voluptatum? Dolor perspiciatis tenetur cumque recusandae.\r\n    Quae aliquam dolorum distinctio, quidem doloremque libero exercitationem cum aut ratione laborum, culpa atque reprehenderit sed dicta fugiat? Laboriosam consequatur ad expedita ipsum placeat laborum, perferendis facilis esse cupiditate? Obcaecati!', 'L''entrepreneuriat collectif', 450000, '2020-12-05', '2020-09-05', 1, NULL, 15, 2, NULL);
+(22, 'Mega Soft', '1174239930', 'Application de reseautage social mettant en relation des personnes de tout age pour des projets communautaires et professionnels.\r\n\r\nLa joie de nous voir reussir des entreprises est partagee. \r\n\r\n\r\n    Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis fugiat magni veritatis voluptatum fuga ipsum quidem facere, adipisci consectetur accusamus ducimus commodi possimus deserunt perspiciatis quam labore error quo asperiores.\r\n    Tempora, quis accusamus consequuntur maiores molestiae consectetur. Eius quam pariatur animi perferendis! Quam excepturi quia est sequi, molestias iste provident adipisci, nulla, repudiandae tempore vitae rerum aspernatur asperiores harum necessitatibus.\r\n    Eligendi quae aperiam pariatur natus voluptate aspernatur perspiciatis, aut commodi repudiandae libero ullam illum dolores sit adipisci architecto. Numquam magnam possimus eaque corrupti quia voluptatibus omnis obcaecati aperiam cupiditate illo?\r\n    Unde praesentium dolor corrupti fuga quas, qui optio excepturi odio. Ex sit itaque facere. Debitis at pariatur magni quod similique! Eveniet dignissimos, eos ratione ex illum quidem itaque et? Ab!\r\n    Rem laboriosam, porro quos, repudiandae voluptatem nobis quidem, atque optio voluptate eos ad corporis pariatur ipsa architecto. In ab quia voluptatem laboriosam soluta molestiae, quos dolorem quod rerum eum dicta!\r\n    Doloremque laboriosam repudiandae, quia veritatis quae dignissimos accusantium temporibus illo cupiditate laudantium porro beatae itaque, quos maxime repellat facere quis dolor rerum. Libero repellat, delectus nesciunt natus tempora animi quod?\r\n    Quod consequatur ducimus a nulla facere eveniet exercitationem est labore nobis aut aliquam et debitis natus autem eligendi quidem accusantium cum consectetur, hic dicta saepe repudiandae similique architecto? Dolorem, reprehenderit.\r\n    Amet, praesentium sunt! Obcaecati repellendus eligendi ab quia et! Excepturi quos ullam enim incidunt? Aut deserunt, inventore tenetur cumque itaque ab aperiam dignissimos cupiditate, dolor, sapiente eius! Cumque, repellendus sit?\r\n    Aperiam, praesentium temporibus blanditiis pariatur in nam, autem quam cumque sequi natus harum modi alias debitis, fugiat provident dicta culpa! Voluptatem maiores quisquam, corrupti eos asperiores earum ea dignissimos fugit!\r\n    Porro aspernatur asperiores ducimus, maxime ipsam sapiente sunt laborum molestias iusto quia quaerat eos labore voluptas autem commodi perspiciatis nostrum odio? Earum obcaecati, officia quod modi illo hic cupiditate eum!\r\n    Ut nisi perferendis unde dolorum. Pariatur itaque, fugit eaque iure tempora et voluptatum debitis porro rem sequi similique, obcaecati mollitia ea recusandae dolor cupiditate distinctio assumenda dolorem nisi saepe repudiandae!\r\n    Id dicta, aspernatur magni fugit ipsa ratione odit! Asperiores similique ea natus necessitatibus minima aut possimus? Quos magnam molestiae suscipit rem praesentium, accusantium dolorem natus, optio modi nesciunt alias nihil.\r\n    Numquam nulla vel aliquam corporis dolorum architecto iure harum unde dolore, quisquam atque ex iusto consectetur nisi necessitatibus debitis explicabo, deserunt optio ipsum ab voluptatum? Dolor perspiciatis tenetur cumque recusandae.\r\n    Quae aliquam dolorum distinctio, quidem doloremque libero exercitationem cum aut ratione laborum, culpa atque reprehenderit sed dicta fugiat? Laboriosam consequatur ad expedita ipsum placeat laborum, perferendis facilis esse cupiditate? Obcaecati!', 'L''entrepreneuriat collectif', 450000, '2020-12-05', '2020-09-05', 1, NULL, 15, 2, NULL),
+(23, 'default@gmail.com', '922087597', ' dgffffffffffffffffffffhyu', 'rthrthrt', 120000, '2020-05-22', '2020-05-16', 1, NULL, 15, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -382,7 +393,7 @@ ALTER TABLE `administrateur`
 -- AUTO_INCREMENT pour la table `anonyme`
 --
 ALTER TABLE `anonyme`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `article`
 --
@@ -397,12 +408,12 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT pour la table `financement`
 --
 ALTER TABLE `financement`
-  MODIFY `idFin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idFin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT pour la table `internaute`
 --
 ALTER TABLE `internaute`
-  MODIFY `idu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT pour la table `message`
 --
@@ -417,7 +428,7 @@ ALTER TABLE `newsletter`
 -- AUTO_INCREMENT pour la table `projet`
 --
 ALTER TABLE `projet`
-  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idpro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Contraintes pour les tables exportées
 --

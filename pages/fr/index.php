@@ -104,7 +104,7 @@
                 }
               ?>
               <div class="ui positive message">
-                Respectons les mesures barrieres gouvernementales
+                Respectons les consignes gouvernementales
               </div>. <br><br>
 
             <img class="card-img-top" style="max-width:6%" src="../../img/covid-19/coronavirus_wear_a_mask_icon_141048.png" alt="">
@@ -134,10 +134,10 @@
               class="ui center aligned stackable grid"
       >
           <?php
-            $conditionA=array("p.idpro","p.etat","p.nomProjet","p.objectif","p.slogan"); 
+            $conditionA=array("idpro","etat","nomProjet","objectif","slogan"); 
             $ordreA=array("DESC","ASC");
             $ioA=mt_rand(0,1);
-            $icA=mt_rand(0,7);
+            $icA=mt_rand(0,4);
             $conditionA=$conditionA[$icA]." ".$ordreA[$ioA];
             $hover=array(
               1=>"imghvr-fade",
@@ -193,6 +193,9 @@
                 $sommeacquise=$resultsetS->acquis;
                 $executionS->closecursor();
           ?>
+          <script>
+            console.log("<?php echo $conditionA; ?>");
+          </script>
           <div class="five wide center aligned column">
               <div class="ui card">
                   <figure class=<?php echo $hover[$posHover]?> style="background: url(../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg);background-size:cover;">
@@ -476,7 +479,7 @@
                 Dans le plan de mise en place d'une entreprise, il se pose toujours....
               </div>
               <div class="extra">
-                <a href='blog.php' class="ui right floated orange button">
+                <a href='vewarticle.php?test=1' class="ui right floated orange button">
                   Lire
                   <i class="right chevron icon"></i>
                 </a>
@@ -499,7 +502,7 @@
                 Dans le plan de mise en place d'une entreprise, il se pose toujours....
               </div>
               <div class="extra">
-                <a href='blog.php' class="ui right floated orange button">
+                <a href='vewarticle.php?test=1' class="ui right floated orange button">
                   Lire
                   <i class="right chevron icon"></i>
                 </a>
@@ -522,7 +525,7 @@
                 Dans le plan de mise en place d'une entreprise, il se pose toujours....
               </div>
               <div class="extra">
-                <a href='blog.php' class="ui right floated orange button">
+                <a href='vewarticle.php?test=1' class="ui right floated orange button">
                   Lire
                   <i class="right chevron icon"></i>
                 </a>

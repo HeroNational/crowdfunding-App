@@ -84,13 +84,13 @@
               
               if (isset($_FILES['image']) AND $_FILES['image']['error'] == 0) {
                 if ($_FILES['image']['size'] <= 20000000) {
-                    $infosfichier = pathinfo($_FILES['image']['name']);
-                    $infosfichier['extension']="jpg";
-                    $extension_image = $infosfichier['extension'];
-                    $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
-                    if (in_array($extension_image, $extensions_permises)){
-                        move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.'jpg' );
-                    }
+                  $infosfichier = pathinfo($_FILES['image']['name']);
+                  $infosfichier['extension']="jpg";
+                  $extension_image = $infosfichier['extension'];
+                  $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
+                  if (in_array($extension_image, $extensions_permises)){
+                    move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.$extension_image );
+                  }
                 }else{
                     $_SESSION['notification']=true;
                     $_SESSION['notification_text']="Il y a eu une erreur qui a interrompu votre inscription.";
@@ -99,7 +99,7 @@
                 }
               }
 
-              $requette=$bdd->query("INSERT INTO `internaute` (`idu`, `email`, `nom`, `prenom`, `password`, `sexe`, `token`, `etat`,`date`,description) VALUES (NULL, '$email','$nom','$prenom','$password','$sexe','$token', '1','$date','$description')");
+              $requette=$bdd->query("INSERT INTO `internaute` (`idu`, `email`, `nom`, `prenom`, `password`, `sexe`, `token`, `etatU`,`date`,description) VALUES (NULL, '$email','$nom','$prenom','$password','$sexe','$token', '1','$date','$description')");
       
               connect($email,$password,$bdd);
               

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 22 Mai 2020 à 01:26
+-- Généré le :  Ven 22 Mai 2020 à 22:54
 -- Version du serveur :  10.1.13-MariaDB
 -- Version de PHP :  5.6.21
 
@@ -37,8 +37,8 @@ CREATE TABLE `compte` (
 --
 
 INSERT INTO `compte` (`id`, `token`, `solde`) VALUES
-('237657675216', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44El', 7999588),
-('675120936', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44E', 6000409),
+('237657675216', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44El', 7999188),
+('675120936', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44E', 6000809),
 ('677881982', 'ageefeg3wfg5Gww4aeawggrrej5rfgweefeebheFaawhfg2h5w4s2egkwfw34g44Ert4', 1);
 
 -- --------------------------------------------------------

@@ -52,7 +52,7 @@
         'date'=>utf8_encode(strval($date))
     );
 
-    $submitProject=$bdd->prepare("INSERT INTO projet (nomProjet, categorie,objectif,slogan, descriptionProjet,duree,image,etat,internaute,date) VALUES (:nom,:categorie,:objectif,:slogan,:description,:duree,:image,0,:id,:date)");
+    $submitProject=$bdd->prepare("INSERT INTO projet (nomProjet, categorieProjet,objectif,slogan, descriptionProjet,duree,image,etat,internaute,date) VALUES (:nom,:categorie,:objectif,:slogan,:description,:duree,:image,0,:id,:date)");
     $submitProject->execute($values);
     
     

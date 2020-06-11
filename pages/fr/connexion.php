@@ -29,7 +29,7 @@
               <div class="col-ms-8 col-md-12 col-lg-8" style=" padding-bottom:40px;">
                 <div class="ui middle aligned center aligned grid" style="margin-top:25px;">
                   <div class="columnForm column">
-                    <form class="ui large form" action="" method="POST">
+                    <form class="ui large form" action="../traitements/authentification.php" method="POST">
                       <div class="ui stacked segment">
                         <h2 class="ui orange header left aligned">
                           <div class="header">

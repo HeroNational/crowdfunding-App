@@ -112,7 +112,7 @@
     }
 
     ?>
-<body oncontextmenu="contextmenu();return false;" id="gbody" onload="load()">
+<body oncontextmenu="contextmenu(); return false;" id="gbody" onload="load()">
 
     <div class="loader forLoad" id="loaderPri">
         <div class="loader-inner">

@@ -138,45 +138,21 @@
                               </div>
                               <div class="ui left icon input">
                                 <?php 
-                                  $captcha1=mt_rand(1,6);
-                                  $captcha2=mt_rand(1,6);
-                                  $captcha3=mt_rand(1,6); 
-                                  $sign=array("+","-","*");
-                                  $op1=mt_rand(0,2);
+                                  $captcha1=mt_rand(1,20);
+                                  $captcha2=mt_rand(1,20);
+                                  $sign=array("+","-");
+                                  $op1=mt_rand(0,1);
                                   $sign1=$sign[$op1];
-                                  $op2=mt_rand(0,2);
-                                  $sign2=$sign[$op2];
+                                  $op2=mt_rand(0,1);
 
-                                  $op3=mt_rand(1,3);
                                   
-                                  if($sign1=="*" && $sign2!="*"){
-                                    $operation="(".$captcha1."".$sign1."".$captcha2.")".$sign2."".$captcha3;
-                                  }elseif($sign1!="*" && $sign2=="*"){
-                                    $operation=$captcha1."".$sign1."(".$captcha2."".$sign2."".$captcha3.")";
-                                  }elseif($sign1=="*" && $sign2=="*"){
-                                    $operation="(".$captcha1."".$sign1."".$captcha2."".$sign2."".$captcha3.")";
-                                  }else{
-                                    $operation=$captcha1."".$sign1."".$captcha2."".$sign2."".$captcha3;
-                                  }
+                                  $operation=$captcha1."".$sign1."".$captcha2;
+                                  
 
-                                  if($sign1=="*" && $sign2="-"){
-                                    $resultat=$captcha1*$captcha2-$captcha3;
-                                  }elseif($sign1=="*" && $sign2=="+"){
-                                    $resultat=$captcha1*$captcha2+$captcha3;
-                                  }elseif($sign1=="*" && $sign2=="*"){
-                                    $resultat=$captcha1*$captcha2*$captcha3;
-                                  }elseif($sign1=="-" && $sign2=="*"){
-                                    $resultat=$captcha1-$captcha2*$captcha3;
-                                  }elseif($sign1=="-" && $sign2=="+"){
-                                    $resultat=$captcha1-$captcha2+$captcha3;
-                                  }elseif($sign1=="-" && $sign2=="-"){
-                                    $resultat=$captcha1-$captcha2-$captcha3;
-                                  }elseif($sign1=="+" && $sign2=="-"){
-                                    $resultat=$captcha1+$captcha2-$captcha3;
-                                  }elseif($sign1=="+" && $sign2=="+"){
-                                    $resultat=$captcha1+$captcha2+$captcha3;
-                                  }elseif($sign1=="+" && $sign2=="*"){
-                                    $resultat=$captcha1+$captcha2*$captcha3;
+                                  if($sign1=="+"){
+                                    $resultat=$captcha1+$captcha2;
+                                  }else{
+                                    $resultat=$captcha1-$captcha2;
                                   }
                                   $_SESSION["captcha"]=$resultat;
                                 ?>

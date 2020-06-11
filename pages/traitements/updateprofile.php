@@ -43,7 +43,7 @@ session_start();
             $extension_image = $infosfichier['extension'];
             $extensions_permises = array('jpg', 'jpeg', 'gif', 'png');
             if (in_array($extension_image, $extensions_permises)){
-                move_uploaded_file($_FILES['image']['tmp_name'], '../../../img/imguser/'.$image.'.jpg' );
+                move_uploaded_file($_FILES['image']['tmp_name'], '../../img/imguser/'.$image.'.'.$extension_image );
             }
         }else{
             $_SESSION['notification']=true;
