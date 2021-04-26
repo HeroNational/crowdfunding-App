@@ -36,7 +36,7 @@
         $_SESSION['notification']=true;
         $_SESSION['notification_text']="Veillez vous connecter pour soumettre vos projets.";
         $_SESSION['notification_status']="info";
-        header("location: ../inscription.php");
+        header("location: ../fr/connexion.php");
       }else{
         $id=$_SESSION['id'];
       }
@@ -56,17 +56,26 @@
     $submitProject->execute($values);
     
     
-    $nom=$nom;
-    $categorie=utf8_encode($categorie);
-    $objectif=utf8_encode($objectif);
-    $slogan=utf8_encode($slogan);
-    $description=utf8_encode($description);
-    $duree=utf8_encode($duree);
-    $image=utf8_encode($image);
-    $id=utf8_encode($id);
-    $date=utf8_encode($date);
+    $categorie=utf8_encode(htmlentities($categorie));
+    $objectif=utf8_encode(htmlentities($objectif));
+    $slogan=utf8_encode(htmlentities($slogan));
+    $description=utf8_encode(htmlentities($description));
+    $duree=utf8_encode(htmlentities($duree));
+    $image=utf8_encode(htmlentities($image));
+    $id=utf8_encode(htmlentities($id));
+    $date=utf8_encode(htmlentities($date));
 
-    $selectProject=$bdd->query("SELECT idpro FROM projet WHERE nomProjet like '$nom' and objectif like '$objectif' and  slogan like '$slogan' and  descriptionProjet like '$description' and duree like '$duree' and  image like '$image' and etat like '0' and internaute like '$id' and date like '$date'");
+    $sql="SELECT idpro FROM projet WHERE 
+            nomProjet like \"".$nom."\" and 
+            objectif like \"".$objectif."\" and  
+            slogan like \"".$slogan."\" and  
+            descriptionProjet like \"".$description."\" and 
+            duree like \"".$duree."\" and  
+            image like \"".$image."\" and 
+            etat like \"0\" and 
+            internaute like \"".$id."\" and 
+            date like \"".$date."\"";
+    $selectProject=$bdd->query($sql);
     while($result=$selectProject->fetch()){
       $idProject=$result['idpro'];
     }

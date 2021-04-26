@@ -1,58 +1,57 @@
 <!DOCTYPE html>
 <html lang="fr" style="overflow-x:hidden">
+
 <head>
     <title>Toutes les campagnes</title>
-    
+
     <?php 
       $index="financer"; 
       include("../../includes/header.php"); 
-      session_start();
     ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
-          <?php include("../../includes/menu.php"); ?>
-    <style type="text/css">
-      body {
-        background-color: #DADADA;
-      }
-      body > .grid {
-        height: 100%;
-      }
-      .columnForm {
-        max-width: 450px;
-      }
-    </style>
+            <?php include("../../includes/menu.php"); ?>
+            <style type="text/css">
+            body {
+                background-color: #DADADA;
+            }
 
-      <div class="container">
-        <div class="ui simple dropdown item">
-          <span class="ui header">Trier par</span> <i class="dropdown icon"></i>
-          <div class="menu">
-            <a class="item" href="#">Type de projets</a>
-            <a class="item" href="#">Entrepreneurs</a>
-            <div class="divider"></div>
-            <a class="item" href="#">Les plus recents</a>
-            <a class="item" href="#">Les plus anciens</a>
-          </div>
-        </div>
+            body>.grid {
+                height: 100%;
+            }
 
-        <div class="ui action left icon input" style="float:right">
-          <i class="search icon"></i>
-          <input type="text" placeholder="Search..." class="ui large">
-          <span class="ui teal button">Rechercher</span>
-        </div>
-        
-        <div class="section-title text-center">
-          <h2>Toutes les campagnes</h2>
-        </div>
-      </div>
-    <div style="width: 100%;position: relative; top: -70px;" class='ui container'>
-    <div 
-          style="padding:0px 10px;
-                  margin-Top:100px"
-              class="ui center aligned stackable grid"
-      >
-          <?php 
+            .columnForm {
+                max-width: 450px;
+            }
+            </style>
+
+            <div class="container">
+                <div class="ui simple dropdown item">
+                    <span class="ui header">Trier par</span> <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">Type de projets <?php echo $_SESSION['user'] ?></a>
+                        <a class="item" href="#">Entrepreneurs</a>
+                        <div class="divider"></div>
+                        <a class="item" href="#">Les plus recents</a>
+                        <a class="item" href="#">Les plus anciens</a>
+                    </div>
+                </div>
+
+                <div class="ui action left icon input" style="float:right">
+                    <i class="search icon"></i>
+                    <input type="text" placeholder="Search..." class="ui large">
+                    <span class="ui teal button">Rechercher</span>
+                </div>
+
+                <div class="section-title text-center">
+                    <h2>Toutes les campagnes</h2>
+                </div>
+            </div>
+            <div style="width: 100%;position: relative; top: -70px;" class='ui container'>
+                <div style="padding:0px 10px;
+                  margin-Top:100px" class="ui center aligned stackable grid">
+                    <?php 
               $hover=array(
                 1=>"imghvr-fade",
                 2=>"imghvr-push-up",
@@ -107,47 +106,50 @@
                   $sommeacquise=$resultsetS->acquis;
                   $executionS->closecursor();
             ?>
-            <div class="five wide center aligned column">
-                <div class="ui card">
-                    <figure class=<?php echo $hover[$posHover]?> style="background: url(../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg);background-size:cover;">
-                        <img src="../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg"/>
-                        <figcaption>
-                            <h3><?php echo '<u>'.$resultset->nomProjet.'</u>'?></h3>
-                            <p style="color:white">
-                              <?php echo utf8_decode($resultset->slogan); ?>
-                            </p>
-                        </figcaption>
-                    </figure>
-                    <h1 class="ui header" style="margin-top:-6px">
-                      <?php echo utf8_decode($resultset->nomProjet) ?>
-                    </h1>
-                    <div class="meta">
-                      <?php echo utf8_decode($resultset->slogan) ?>
-                    </div>
-                    <hr>
-                    <span>
-                        <span style="color:#ec4e43">
-                            <?php     
+                    <div class="five wide center aligned column">
+                        <div class="ui card">
+                            <figure class=<?php echo $hover[$posHover]?>
+                                style="background: url(../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg);background-size:cover;">
+                                <img src="../../img/imgprojet/<?php echo utf8_decode($resultset->image) ?>.jpg" />
+                                <figcaption>
+                                    <h3><?php echo '<u>'.$resultset->nomProjet.'</u>'?></h3>
+                                    <p style="color:white">
+                                        <?php echo utf8_decode($resultset->slogan); ?>
+                                    </p>
+                                </figcaption>
+                            </figure>
+                            <h1 class="ui header" style="margin-top:-6px">
+                                <?php echo utf8_decode($resultset->nomProjet) ?>
+                            </h1>
+                            <div class="meta">
+                                <?php echo utf8_decode($resultset->slogan) ?>
+                            </div>
+                            <hr>
+                            <span>
+                                <span style="color:#ec4e43">
+                                    <?php     
                                 $diff=date_diff(date_create(date("y-m-d")),date_create(utf8_decode($resultset->duree)));
                                 echo $diff->format("%a"); 
                             ?>
-                            &nbsp;
-                        </span>
-                        Jours restants
-                    </span>
-                    <br>
-                    <?php 
+                                    &nbsp;
+                                </span>
+                                Jours restants
+                            </span>
+                            <br>
+                            <?php 
                       $sommetotale=$resultset->objectif;
                       $per=($sommeacquise*100)/$sommetotale;
                       $sommetotale=number_format($sommetotale, 0,'.',' ');
                       $per=number_format($per, 0,'.', '');
                       
                     ?>
-                    <br>
-                    <div class=""><?php echo number_format($sommeacquise,0,"."," ").' ('.$per."%) sur <b>".$sommetotale."</b> XAF"; ?></div>
-                    <span class="ui extra">
-                        <span class="ui purple progress active" style="height:13px!important">
-                            <span class="bar" style="width:
+                            <br>
+                            <div class="">
+                                <?php echo number_format($sommeacquise,0,"."," ").' ('.$per."%) sur <b>".$sommetotale."</b> XAF"; ?>
+                            </div>
+                            <span class="ui extra">
+                                <span class="ui purple progress active" style="height:13px!important">
+                                    <span class="bar" style="width:
                                   <?php echo ($per=($per<=100)?$per:"100");?>%;background:<?php
                                       if($per<16.66){
                                           $theming="217, 92, 92";
@@ -166,34 +168,36 @@
                                       }
                                       echo "rgba(".$theming.")";
                                   ?>!important;  height:6px">
-                                <span class="progress"></span>
+                                        <span class="progress"></span>
+                                    </span>
+                                </span>
                             </span>
-                        </span>
-                    </span>
-                    <a href="financement.php?<?php echo 'token='.str_shuffle("erfwfkfewhfewafwegswefhbewgjhwageg24354geGFE4w2ga4aew54erg3gaerg5").'&prodhgdthtrhydtrtrjutydrhrthwee='.$resultset->idpro.'&kind='.str_shuffle("erfg24354geGFE4w2ga4aew54erg3gaerg5") ?>"   class="ui button orange fluid" style="padding:-5px 3px!important">Financer</a>
-                
-                </div>
-            </div>
-          <?php 
+                            <a href="financement.php?<?php echo 'token='.str_shuffle("erfwfkfewhfewafwegswefhbewgjhwageg24354geGFE4w2ga4aew54erg3gaerg5").'&prodhgdthtrhydtrtrjutydrhrthwee='.$resultset->idpro.'&kind='.str_shuffle("erfg24354geGFE4w2ga4aew54erg3gaerg5") ?>"
+                                class="ui button orange fluid" style="padding:-5px 3px!important">Financer</a>
+
+                        </div>
+                    </div>
+                    <?php 
             }
             $execution->closecursor();
           ?>
-   
-    </div>
-              <style>
-                #helm {
-                  width: 100%;
-                  height:60px;
-                  background-size: 100%;
-                  position: relative;
-                  margin-top: 40px;
-                }
-              </style>
 
-        <?php 
+                </div>
+                <style>
+                #helm {
+                    width: 100%;
+                    height: 60px;
+                    background-size: 100%;
+                    position: relative;
+                    margin-top: 40px;
+                }
+                </style>
+
+                <?php 
           
             include("../../includes/footer.php");
           
         ?>
-    </body >
+                </body>
+
 </html>

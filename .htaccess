@@ -1,0 +1,2 @@
+ErrorDocument 404 https://localhost/serve/Crowdfunding/pages/fr/404.php
+ErrorDocument 500 https://localhost/serve/Crowdfunding/pages/fr//500.php

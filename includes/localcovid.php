@@ -21,7 +21,7 @@
         else
         {
             $ip = $_SERVER['REMOTE_ADDR'];
-      }
+        }
       isset($_GET['ip'])?$ip=$_GET['ip']:$ip;
       //Testeur d'adresse ip.
 

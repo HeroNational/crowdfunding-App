@@ -4,26 +4,26 @@
 <head>
     <title>blog</title>
 
-    <?php $index="projet"; include("../../includes/header.php"); ?>
+    <?php $index="blog"; include("../../includes/header.php"); ?>
     <section id="helm" class="wow fadeIn">
 
         <div class="helm-container">
             <?php 
-            session_start();
-            include("../../includes/menu.php"); 
-        ?>
+                !isset($_SESSION)?session_start():'';
+                include("../../includes/menu.php"); 
+            ?>
             <style type="text/css">
-                body {
-                    background-color: #DADADA;
-                }
+            body {
+                background-color: #DADADA;
+            }
 
-                body>.grid {
-                    height: 100%;
-                }
+            body>.grid {
+                height: 100%;
+            }
 
-                .columnForm {
-                    max-width: 450px;
-                }
+            .columnForm {
+                max-width: 450px;
+            }
             </style>
             <?php
       
@@ -158,7 +158,7 @@
                                     <p><span style="color: #008000; font-family: 'arial black', sans-serif;"><span
                                                 style="color: #00ff00;"><span style="color: #cc99ff;"><span
                                                         style="color: #999999;"><img
-                                                            src="blob:http://localhost/cc633c82-68db-42ad-9384-5774bc17401f"
+                                                            src="blob:http://      !isset($_SESSION)?session_start():'';cc633c82-68db-42ad-9384-5774bc17401f"
                                                             alt="Une image" width="1295"
                                                             height="260" /></span></span></span></span></p>
                                 </div>
@@ -261,13 +261,13 @@
 
                     </div>
                     <style>
-                        #helm {
-                            width: 100%;
-                            height: 60px;
-                            background-size: 100%;
-                            position: relative;
-                            margin-top: 40px;
-                        }
+                    #helm {
+                        width: 100%;
+                        height: 60px;
+                        background-size: 100%;
+                        position: relative;
+                        margin-top: 40px;
+                    }
                     </style>
 
                     <?php 
